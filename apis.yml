@@ -3,7 +3,7 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/unitedhealthcare/refs/heads/main/apis.yml
 apis:
   - aid: unitedhealthcare:unitedhealthcare
-    name: UnitedHealthcare
+    name: United Healthcare     API
     tags:
       - Health
       - Insurance
@@ -26,15 +26,9 @@ created: '2025-03-01'
 modified: '2025-03-02'
 position: Consuming
 description: >-
-  United Healthcare is a leading provider of health insurance and healthcare
-  services in the United States. They offer a wide range of insurance plans,
-  including individual and group coverage, as well as Medicare and Medicaid
-  plans. In addition to insurance, United Healthcare also offers a variety of
-  health and wellness programs to help their members stay healthy and manage
-  chronic conditions. They work with a network of healthcare providers to ensure
-  their members have access to high-quality care and services. Overall, United
-  Healthcare is committed to helping individuals and families navigate the
-  complexities of the healthcare system and improve their overall well-being.
+  Find, integrate and manage your UnitedHealthcare APIs all in one place. Save
+  time and money with fewer interruptions by automating data into existing
+  workflows. 
 maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
