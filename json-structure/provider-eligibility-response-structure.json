@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unitedhealthcare/refs/heads/main/json-structure/provider-eligibility-response-structure.json",
+  "name": "UnitedHealthcare Eligibility Response",
+  "type": "object",
+  "description": "Real-time eligibility verification response with coverage details",
+  "fields": [
+    {
+      "name": "memberId",
+      "type": "string",
+      "description": "UnitedHealthcare member ID"
+    },
+    {
+      "name": "memberName",
+      "type": "string",
+      "description": "Member full name"
+    },
+    {
+      "name": "coverageStatus",
+      "type": "string",
+      "description": "Coverage status",
+      "enum": [
+        "ACTIVE",
+        "INACTIVE",
+        "TERMED"
+      ]
+    },
+    {
+      "name": "planName",
+      "type": "string",
+      "description": "Insurance plan name"
+    },
+    {
+      "name": "groupNumber",
+      "type": "string",
+      "description": "Group number"
+    },
+    {
+      "name": "effectiveDate",
+      "type": "date",
+      "description": "Coverage effective date"
+    },
+    {
+      "name": "terminationDate",
+      "type": "date",
+      "description": "Coverage termination date"
+    },
+    {
+      "name": "deductible",
+      "type": "decimal",
+      "description": "Annual deductible amount"
+    },
+    {
+      "name": "deductibleMet",
+      "type": "decimal",
+      "description": "YTD deductible met"
+    },
+    {
+      "name": "outOfPocketMax",
+      "type": "decimal",
+      "description": "Annual out-of-pocket maximum"
+    },
+    {
+      "name": "outOfPocketMet",
+      "type": "decimal",
+      "description": "YTD out-of-pocket met"
+    },
+    {
+      "name": "copay",
+      "type": "decimal",
+      "description": "Copay amount"
+    },
+    {
+      "name": "coinsurance",
+      "type": "decimal",
+      "description": "Coinsurance percentage"
+    },
+    {
+      "name": "networkStatus",
+      "type": "string",
+      "description": "Network status",
+      "enum": [
+        "IN_NETWORK",
+        "OUT_OF_NETWORK",
+        "UNKNOWN"
+      ]
+    }
+  ]
+}

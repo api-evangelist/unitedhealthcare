@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unitedhealthcare/refs/heads/main/json-schema/provider-claim-pre-check-request-schema.json",
+  "title": "UnitedHealthcare Claim Pre-Check Request",
+  "description": "Request for claim pre-submission validation",
+  "type": "object",
+  "required": [
+    "memberId",
+    "npi",
+    "serviceDate",
+    "diagnosisCodes",
+    "procedureCodes"
+  ],
+  "properties": {
+    "memberId": {
+      "type": "string",
+      "description": "Member ID"
+    },
+    "npi": {
+      "type": "string",
+      "description": "Billing provider NPI"
+    },
+    "serviceDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of service"
+    },
+    "diagnosisCodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "ICD-10 diagnosis codes"
+    },
+    "procedureCodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "CPT/HCPCS procedure codes"
+    },
+    "charges": {
+      "type": "number",
+      "description": "Total billed charges"
+    },
+    "placeOfService": {
+      "type": "string",
+      "description": "Place of service code"
+    }
+  }
+}

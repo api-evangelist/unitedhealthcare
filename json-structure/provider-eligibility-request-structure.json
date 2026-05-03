@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unitedhealthcare/refs/heads/main/json-structure/provider-eligibility-request-structure.json",
+  "name": "UnitedHealthcare Eligibility Request",
+  "type": "object",
+  "description": "Request parameters for real-time eligibility and benefit verification",
+  "fields": [
+    {
+      "name": "memberId",
+      "type": "string",
+      "description": "UnitedHealthcare member ID"
+    },
+    {
+      "name": "dateOfBirth",
+      "type": "date",
+      "description": "Member date of birth"
+    },
+    {
+      "name": "serviceType",
+      "type": "string",
+      "description": "X12 service type code"
+    },
+    {
+      "name": "dateOfService",
+      "type": "date",
+      "description": "Requested date of service"
+    },
+    {
+      "name": "npi",
+      "type": "string",
+      "description": "Rendering provider NPI"
+    },
+    {
+      "name": "groupNumber",
+      "type": "string",
+      "description": "Insurance group number"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unitedhealthcare/refs/heads/main/json-schema/provider-claim-inquiry-request-schema.json",
+  "title": "UnitedHealthcare Claim Inquiry Request",
+  "description": "Request for claim status inquiry",
+  "type": "object",
+  "properties": {
+    "claimNumber": {
+      "type": "string",
+      "description": "UHC claim number"
+    },
+    "npi": {
+      "type": "string",
+      "description": "Provider NPI"
+    },
+    "memberId": {
+      "type": "string",
+      "description": "Member ID"
+    },
+    "dateOfServiceFrom": {
+      "type": "string",
+      "format": "date",
+      "description": "Service date range start"
+    },
+    "dateOfServiceTo": {
+      "type": "string",
+      "format": "date",
+      "description": "Service date range end"
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unitedhealthcare/refs/heads/main/json-schema/provider-provider-demographics-schema.json",
+  "title": "UnitedHealthcare Provider Demographics",
+  "description": "Healthcare provider demographic and credentialing information",
+  "type": "object",
+  "properties": {
+    "npi": {
+      "type": "string",
+      "description": "National Provider Identifier"
+    },
+    "firstName": {
+      "type": "string",
+      "description": "Provider first name"
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Provider last name"
+    },
+    "organizationName": {
+      "type": "string",
+      "description": "Organization name"
+    },
+    "providerType": {
+      "type": "string",
+      "enum": [
+        "INDIVIDUAL",
+        "ORGANIZATION"
+      ],
+      "description": "Provider type"
+    },
+    "specialty": {
+      "type": "string",
+      "description": "Primary specialty"
+    },
+    "subspecialties": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Subspecialties"
+    },
+    "networkStatus": {
+      "type": "string",
+      "enum": [
+        "IN_NETWORK",
+        "OUT_OF_NETWORK"
+      ],
+      "description": "Network status"
+    },
+    "acceptingNewPatients": {
+      "type": "boolean",
+      "description": "Accepting new patients"
+    },
+    "address": {
+      "type": "object",
+      "description": "Practice address",
+      "properties": {
+        "street1": {
+          "type": "string"
+        },
+        "street2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string"
+        }
+      }
+    },
+    "phone": {
+      "type": "string",
+      "description": "Office phone number"
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Languages spoken"
+    },
+    "boardCertifications": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Board certifications"
+    }
+  }
+}

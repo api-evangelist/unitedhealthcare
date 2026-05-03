@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unitedhealthcare/refs/heads/main/json-structure/provider-prior-auth-check-response-structure.json",
+  "name": "UnitedHealthcare Prior Auth Check Response",
+  "type": "object",
+  "description": "Prior authorization requirement and status response",
+  "fields": [
+    {
+      "name": "authorizationRequired",
+      "type": "boolean",
+      "description": "Whether prior auth is required"
+    },
+    {
+      "name": "authorizationStatus",
+      "type": "string",
+      "description": "Authorization status",
+      "enum": [
+        "NOT_REQUIRED",
+        "REQUIRED",
+        "APPROVED",
+        "PENDING",
+        "DENIED"
+      ]
+    },
+    {
+      "name": "authorizationNumber",
+      "type": "string",
+      "description": "Authorization number"
+    },
+    {
+      "name": "validFromDate",
+      "type": "date",
+      "description": "Auth valid from"
+    },
+    {
+      "name": "validToDate",
+      "type": "date",
+      "description": "Auth valid to"
+    },
+    {
+      "name": "approvedUnits",
+      "type": "integer",
+      "description": "Approved units/visits"
+    },
+    {
+      "name": "referralRequired",
+      "type": "boolean",
+      "description": "Referral required"
+    }
+  ]
+}

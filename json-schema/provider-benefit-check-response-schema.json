@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unitedhealthcare/refs/heads/main/json-schema/provider-benefit-check-response-schema.json",
+  "title": "UnitedHealthcare Benefit Check Response",
+  "description": "Patient benefit check response with cost-sharing details",
+  "type": "object",
+  "properties": {
+    "coveredBenefit": {
+      "type": "boolean",
+      "description": "Whether service is covered"
+    },
+    "authorizationRequired": {
+      "type": "boolean",
+      "description": "Prior auth required"
+    },
+    "referralRequired": {
+      "type": "boolean",
+      "description": "Referral required"
+    },
+    "estimatedPatientResponsibility": {
+      "type": "number",
+      "description": "Estimated patient cost"
+    },
+    "estimatedPlanPayment": {
+      "type": "number",
+      "description": "Estimated plan payment"
+    },
+    "costSharingDetails": {
+      "type": "object",
+      "description": "Cost-sharing breakdown",
+      "properties": {
+        "copay": {
+          "type": "number"
+        },
+        "coinsurance": {
+          "type": "number"
+        },
+        "deductibleApplies": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

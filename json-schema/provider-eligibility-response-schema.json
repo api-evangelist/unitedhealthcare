@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unitedhealthcare/refs/heads/main/json-schema/provider-eligibility-response-schema.json",
+  "title": "UnitedHealthcare Eligibility Response",
+  "description": "Real-time eligibility verification response with coverage details",
+  "type": "object",
+  "properties": {
+    "memberId": {
+      "type": "string",
+      "description": "UnitedHealthcare member ID"
+    },
+    "memberName": {
+      "type": "string",
+      "description": "Member full name"
+    },
+    "coverageStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "INACTIVE",
+        "TERMED"
+      ],
+      "description": "Coverage status"
+    },
+    "planName": {
+      "type": "string",
+      "description": "Insurance plan name"
+    },
+    "groupNumber": {
+      "type": "string",
+      "description": "Group number"
+    },
+    "effectiveDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Coverage effective date"
+    },
+    "terminationDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Coverage termination date"
+    },
+    "deductible": {
+      "type": "number",
+      "description": "Annual deductible amount"
+    },
+    "deductibleMet": {
+      "type": "number",
+      "description": "YTD deductible met"
+    },
+    "outOfPocketMax": {
+      "type": "number",
+      "description": "Annual out-of-pocket maximum"
+    },
+    "outOfPocketMet": {
+      "type": "number",
+      "description": "YTD out-of-pocket met"
+    },
+    "copay": {
+      "type": "number",
+      "description": "Copay amount"
+    },
+    "coinsurance": {
+      "type": "number",
+      "description": "Coinsurance percentage"
+    },
+    "networkStatus": {
+      "type": "string",
+      "enum": [
+        "IN_NETWORK",
+        "OUT_OF_NETWORK",
+        "UNKNOWN"
+      ],
+      "description": "Network status"
+    }
+  }
+}

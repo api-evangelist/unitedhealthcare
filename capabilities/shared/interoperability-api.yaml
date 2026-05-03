@@ -1,0 +1,236 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "UnitedHealthcare Interoperability API"
+  description: "FHIR R4-compliant patient access, provider directory, and formulary APIs per CMS interoperability mandates."
+  tags:
+    - UnitedHealthcare
+    - FHIR
+    - Patient Access
+    - Provider Directory
+    - CMS Interoperability
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      UHC_FHIR_TOKEN: UHC_FHIR_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: uhc-fhir
+      baseUri: https://api.uhc.com/fhir/R4
+      description: "UnitedHealthcare FHIR R4 Interoperability API."
+      authentication:
+        type: bearer
+        token: "{{UHC_FHIR_TOKEN}}"
+      resources:
+        - name: patient
+          path: /Patient/{id}
+          description: "FHIR Patient resource."
+          operations:
+            - name: get-patient
+              method: GET
+              description: "Retrieve FHIR Patient demographics for a member."
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Patient resource ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: explanation-of-benefit
+          path: /ExplanationOfBenefit
+          description: "FHIR ExplanationOfBenefit resources."
+          operations:
+            - name: list-eobs
+              method: GET
+              description: "List ExplanationOfBenefit (claims) for a patient."
+              inputParameters:
+                - name: patient
+                  in: query
+                  type: string
+                  required: true
+                  description: "Patient resource ID."
+                - name: _lastUpdated
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by last updated date."
+                - name: type
+                  in: query
+                  type: string
+                  required: false
+                  description: "Claim type filter."
+                - name: _count
+                  in: query
+                  type: string
+                  required: false
+                  description: "Max results."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: coverage
+          path: /Coverage
+          description: "FHIR Coverage resources."
+          operations:
+            - name: list-coverage
+              method: GET
+              description: "List Coverage resources for a patient."
+              inputParameters:
+                - name: patient
+                  in: query
+                  type: string
+                  required: true
+                  description: "Patient resource ID."
+                - name: status
+                  in: query
+                  type: string
+                  required: false
+                  description: "Coverage status filter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: practitioner
+          path: /Practitioner
+          description: "FHIR Practitioner resources."
+          operations:
+            - name: list-practitioners
+              method: GET
+              description: "Search provider directory for practitioners."
+              inputParameters:
+                - name: name
+                  in: query
+                  type: string
+                  required: false
+                  description: "Provider name search."
+                - name: specialty
+                  in: query
+                  type: string
+                  required: false
+                  description: "Specialty taxonomy code."
+                - name: address-state
+                  in: query
+                  type: string
+                  required: false
+                  description: "State filter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8200
+      namespace: uhc-fhir-rest
+      resources:
+        - path: /v1/patient/{id}
+          name: patient
+          description: "Patient demographics."
+          operations:
+            - method: GET
+              name: get-patient
+              description: "Get patient."
+              call: "uhc-fhir.get-patient"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/eobs
+          name: explanation-of-benefit
+          description: "Explanation of benefits."
+          operations:
+            - method: GET
+              name: list-eobs
+              description: "List EOBs."
+              call: "uhc-fhir.list-eobs"
+              with:
+                patient: "rest.patient"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/coverage
+          name: coverage
+          description: "Coverage details."
+          operations:
+            - method: GET
+              name: list-coverage
+              description: "List coverage."
+              call: "uhc-fhir.list-coverage"
+              with:
+                patient: "rest.patient"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/practitioners
+          name: practitioners
+          description: "Provider directory."
+          operations:
+            - method: GET
+              name: list-practitioners
+              description: "Search practitioners."
+              call: "uhc-fhir.list-practitioners"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9200
+      namespace: uhc-fhir-mcp
+      transport: http
+      tools:
+        - name: get-patient-demographics
+          description: "Retrieve FHIR R4 Patient demographics for a UnitedHealthcare member."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "uhc-fhir.get-patient"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-claims-history
+          description: "List FHIR ExplanationOfBenefit resources showing a member's claims history and payments."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "uhc-fhir.list-eobs"
+          with:
+            patient: "tools.patient"
+            type: "tools.claimType"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-coverage-details
+          description: "Get FHIR Coverage resources showing a member's current and historical insurance coverage."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "uhc-fhir.list-coverage"
+          with:
+            patient: "tools.patient"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: search-providers
+          description: "Search UnitedHealthcare's FHIR Provider Directory for in-network practitioners by name, specialty, or state."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "uhc-fhir.list-practitioners"
+          with:
+            name: "tools.providerName"
+            specialty: "tools.specialty"
+            "address-state": "tools.state"
+          outputParameters:
+            - type: object
+              mapping: "$."

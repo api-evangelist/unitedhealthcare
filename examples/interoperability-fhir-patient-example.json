@@ -1,0 +1,49 @@
+{
+  "resourceType": "Patient",
+  "id": "uhc-patient-987654321",
+  "identifier": [
+    {
+      "system": "https://api.uhc.com/fhir/R4/member-id",
+      "value": "987654321"
+    },
+    {
+      "system": "http://hl7.org/fhir/sid/us-ssn",
+      "value": "***-**-6789"
+    }
+  ],
+  "name": [
+    {
+      "use": "official",
+      "family": "Smith",
+      "given": [
+        "Jane",
+        "Marie"
+      ]
+    }
+  ],
+  "birthDate": "1985-06-22",
+  "gender": "female",
+  "address": [
+    {
+      "line": [
+        "5678 Oak Avenue",
+        "Apt 12"
+      ],
+      "city": "Eden Prairie",
+      "state": "MN",
+      "postalCode": "55344"
+    }
+  ],
+  "telecom": [
+    {
+      "system": "phone",
+      "value": "952-555-0200",
+      "use": "home"
+    },
+    {
+      "system": "email",
+      "value": "jsmith@email.com",
+      "use": "home"
+    }
+  ]
+}

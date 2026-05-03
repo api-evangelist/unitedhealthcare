@@ -1,0 +1,75 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "uhc": "https://api.uhcprovider.com/vocab#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "fhir": "http://hl7.org/fhir/",
+    "memberId": "uhc:memberId",
+    "memberName": "uhc:memberName",
+    "coverageStatus": "uhc:coverageStatus",
+    "planName": "uhc:planName",
+    "groupNumber": "uhc:groupNumber",
+    "effectiveDate": {
+      "@id": "uhc:effectiveDate",
+      "@type": "xsd:date"
+    },
+    "terminationDate": {
+      "@id": "uhc:terminationDate",
+      "@type": "xsd:date"
+    },
+    "deductible": {
+      "@id": "uhc:deductible",
+      "@type": "xsd:decimal"
+    },
+    "deductibleMet": {
+      "@id": "uhc:deductibleMet",
+      "@type": "xsd:decimal"
+    },
+    "outOfPocketMax": {
+      "@id": "uhc:outOfPocketMax",
+      "@type": "xsd:decimal"
+    },
+    "copay": {
+      "@id": "uhc:copay",
+      "@type": "xsd:decimal"
+    },
+    "coinsurance": {
+      "@id": "uhc:coinsurance",
+      "@type": "xsd:decimal"
+    },
+    "networkStatus": "uhc:networkStatus",
+    "claimNumber": "uhc:claimNumber",
+    "claimStatus": "uhc:claimStatus",
+    "billedAmount": {
+      "@id": "uhc:billedAmount",
+      "@type": "xsd:decimal"
+    },
+    "allowedAmount": {
+      "@id": "uhc:allowedAmount",
+      "@type": "xsd:decimal"
+    },
+    "paidAmount": {
+      "@id": "uhc:paidAmount",
+      "@type": "xsd:decimal"
+    },
+    "paymentDate": {
+      "@id": "uhc:paymentDate",
+      "@type": "xsd:date"
+    },
+    "npi": {
+      "@id": "uhc:npi",
+      "@type": "xsd:string"
+    },
+    "authorizationRequired": {
+      "@id": "uhc:authorizationRequired",
+      "@type": "xsd:boolean"
+    },
+    "authorizationNumber": "uhc:authorizationNumber",
+    "authorizationStatus": "uhc:authorizationStatus",
+    "EligibilityResponse": "uhc:EligibilityResponse",
+    "ClaimInquiryResponse": "uhc:ClaimInquiryResponse",
+    "PriorAuthCheckResponse": "uhc:PriorAuthCheckResponse",
+    "ProviderDemographics": "uhc:ProviderDemographics"
+  }
+}

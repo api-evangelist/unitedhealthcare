@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unitedhealthcare/refs/heads/main/json-structure/provider-prior-auth-check-request-structure.json",
+  "name": "UnitedHealthcare Prior Auth Check Request",
+  "type": "object",
+  "description": "Request to check prior authorization requirements for a procedure",
+  "fields": [
+    {
+      "name": "memberId",
+      "type": "string",
+      "description": "Member ID"
+    },
+    {
+      "name": "npi",
+      "type": "string",
+      "description": "Provider NPI"
+    },
+    {
+      "name": "serviceCode",
+      "type": "string",
+      "description": "CPT/HCPCS service code"
+    },
+    {
+      "name": "serviceType",
+      "type": "string",
+      "description": "Service type description"
+    },
+    {
+      "name": "dateOfService",
+      "type": "date",
+      "description": "Planned date of service"
+    },
+    {
+      "name": "diagnosisCodes",
+      "type": "array",
+      "description": "ICD-10 codes",
+      "items": {
+        "type": "string"
+      }
+    },
+    {
+      "name": "placeOfService",
+      "type": "string",
+      "description": "Place of service code"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unitedhealthcare/refs/heads/main/json-schema/provider-claim-inquiry-response-schema.json",
+  "title": "UnitedHealthcare Claim Inquiry Response",
+  "description": "Claim status inquiry response with payment details",
+  "type": "object",
+  "properties": {
+    "claimNumber": {
+      "type": "string",
+      "description": "UHC claim number"
+    },
+    "claimStatus": {
+      "type": "string",
+      "enum": [
+        "RECEIVED",
+        "IN_PROCESS",
+        "PROCESSED",
+        "DENIED",
+        "ADJUSTED",
+        "REVERSED"
+      ],
+      "description": "Claim status"
+    },
+    "serviceDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of service"
+    },
+    "billedAmount": {
+      "type": "number",
+      "description": "Total billed charges"
+    },
+    "allowedAmount": {
+      "type": "number",
+      "description": "Allowed amount"
+    },
+    "paidAmount": {
+      "type": "number",
+      "description": "Amount paid"
+    },
+    "patientResponsibility": {
+      "type": "number",
+      "description": "Patient responsibility"
+    },
+    "paymentDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Payment date"
+    },
+    "checkNumber": {
+      "type": "string",
+      "description": "Check or EFT trace number"
+    },
+    "denialReasonCode": {
+      "type": "string",
+      "description": "Denial reason code"
+    },
+    "denialReasonDescription": {
+      "type": "string",
+      "description": "Denial reason description"
+    }
+  }
+}

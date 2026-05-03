@@ -1,0 +1,13 @@
+{
+  "claimNumber": "CLM-2026-001234",
+  "claimStatus": "PROCESSED",
+  "serviceDate": "2026-04-15",
+  "billedAmount": 150.0,
+  "allowedAmount": 125.5,
+  "paidAmount": 95.5,
+  "patientResponsibility": 30.0,
+  "paymentDate": "2026-04-28",
+  "checkNumber": "EFT-20260428-00123",
+  "denialReasonCode": null,
+  "denialReasonDescription": null
+}

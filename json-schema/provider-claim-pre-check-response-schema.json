@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unitedhealthcare/refs/heads/main/json-schema/provider-claim-pre-check-response-schema.json",
+  "title": "UnitedHealthcare Claim Pre-Check Response",
+  "description": "Claim pre-check validation result with errors and estimated payment",
+  "type": "object",
+  "properties": {
+    "validationStatus": {
+      "type": "string",
+      "enum": [
+        "VALID",
+        "ERRORS",
+        "WARNINGS"
+      ],
+      "description": "Validation status"
+    },
+    "errors": {
+      "type": "array",
+      "description": "Validation errors",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "description": "Validation warnings",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "estimatedPayment": {
+      "type": "number",
+      "description": "Estimated payment if valid"
+    }
+  }
+}

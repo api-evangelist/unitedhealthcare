@@ -1,0 +1,724 @@
+openapi: 3.1.0
+info:
+  title: UnitedHealthcare Provider API
+  description: >-
+    The UnitedHealthcare Provider API provides real-time access to eligibility verification,
+    claims management, prior authorization, and provider directory services for healthcare
+    providers, payers, and health IT developers. Available through the UnitedHealthcare API
+    Marketplace at apimarketplace.uhcprovider.com.
+  version: '1.0'
+  contact:
+    name: UnitedHealthcare API Marketplace
+    url: https://apimarketplace.uhcprovider.com
+  license:
+    name: UnitedHealthcare API Terms of Use
+    url: https://apimarketplace.uhcprovider.com/legal
+externalDocs:
+  description: UnitedHealthcare API Marketplace Documentation
+  url: https://apimarketplace.uhcprovider.com/#/
+servers:
+  - url: https://api.uhcprovider.com
+    description: Production
+tags:
+  - name: Eligibility
+    description: Real-time eligibility and benefit verification
+  - name: Claims
+    description: Claim pre-check, submission, and inquiry
+  - name: Prior Authorization
+    description: Prior authorization and referral actions
+  - name: Providers
+    description: Provider demographics and directory
+security:
+  - bearerAuth: []
+paths:
+  /eligibility/v1/real-time:
+    post:
+      operationId: checkEligibility
+      summary: UnitedHealthcare Real-Time Eligibility Check
+      description: >-
+        Perform a real-time pre-service eligibility and benefit verification for a
+        UnitedHealthcare member. Returns coverage details, deductibles, copays, and
+        benefit limits for a specific service type and date of service.
+      tags:
+        - Eligibility
+      x-microcks-operation:
+        dispatcher: SCRIPT
+        dispatcherRules: "return 'ACTIVE';"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EligibilityRequest'
+            x-microcks-default: |
+              {
+                "memberId": "123456789",
+                "dateOfBirth": "1980-01-15",
+                "serviceType": "30",
+                "dateOfService": "2026-05-03",
+                "npi": "1234567890"
+              }
+      responses:
+        '200':
+          description: Eligibility verification result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EligibilityResponse'
+        '400':
+          description: Bad request - invalid input
+        '401':
+          description: Unauthorized - invalid or missing token
+        '404':
+          description: Member not found
+        '429':
+          description: Too many requests
+  /eligibility/v1/patient-benefit-check:
+    post:
+      operationId: checkPatientBenefit
+      summary: UnitedHealthcare Real Patient Benefit Check
+      description: >-
+        Check specific patient benefit details for a given service including covered
+        benefits, cost-sharing information, network status, and utilization management
+        requirements.
+      tags:
+        - Eligibility
+      x-microcks-operation:
+        dispatcher: SCRIPT
+        dispatcherRules: "return 'COVERED';"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BenefitCheckRequest'
+            x-microcks-default: |
+              {
+                "memberId": "123456789",
+                "dateOfBirth": "1980-01-15",
+                "serviceCode": "99213",
+                "dateOfService": "2026-05-03",
+                "npi": "1234567890",
+                "providerTaxId": "12-3456789"
+              }
+      responses:
+        '200':
+          description: Benefit check result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BenefitCheckResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Member not found
+        '429':
+          description: Too many requests
+  /claims/v1/pre-check:
+    post:
+      operationId: claimPreCheck
+      summary: UnitedHealthcare Real Claim Pre-Check
+      description: >-
+        Validate a claim before submission to identify potential issues including
+        missing information, coverage gaps, authorization requirements, and billing
+        edits. Reduces claim denials and accelerates payment.
+      tags:
+        - Claims
+      x-microcks-operation:
+        dispatcher: SCRIPT
+        dispatcherRules: "return 'VALID';"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClaimPreCheckRequest'
+            x-microcks-default: |
+              {
+                "memberId": "123456789",
+                "npi": "1234567890",
+                "serviceDate": "2026-05-03",
+                "diagnosisCodes": ["J06.9"],
+                "procedureCodes": ["99213"],
+                "charges": 150.00
+              }
+      responses:
+        '200':
+          description: Claim pre-check result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClaimPreCheckResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '422':
+          description: Validation failed
+        '429':
+          description: Too many requests
+  /claims/v1/inquiry:
+    post:
+      operationId: inquireClaim
+      summary: UnitedHealthcare Real Claim Inquiry
+      description: >-
+        Retrieve the status and details of submitted claims including payment information,
+        denial reasons, adjustment codes, and explanation of benefits data for a member
+        or provider.
+      tags:
+        - Claims
+      x-microcks-operation:
+        dispatcher: SCRIPT
+        dispatcherRules: "return 'PROCESSED';"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClaimInquiryRequest'
+            x-microcks-default: |
+              {
+                "claimNumber": "CLM-2026-001234",
+                "npi": "1234567890",
+                "memberId": "123456789",
+                "dateOfServiceFrom": "2026-01-01",
+                "dateOfServiceTo": "2026-05-03"
+              }
+      responses:
+        '200':
+          description: Claim inquiry result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClaimInquiryResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Claim not found
+        '429':
+          description: Too many requests
+  /prior-auth/v1/check:
+    post:
+      operationId: checkPriorAuth
+      summary: UnitedHealthcare Real Prior Auth Check
+      description: >-
+        Check if a prior authorization or referral is required for a specific service
+        and procedure, and determine the authorization status for a UnitedHealthcare member.
+      tags:
+        - Prior Authorization
+      x-microcks-operation:
+        dispatcher: SCRIPT
+        dispatcherRules: "return 'NOT_REQUIRED';"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PriorAuthCheckRequest'
+            x-microcks-default: |
+              {
+                "memberId": "123456789",
+                "npi": "1234567890",
+                "serviceCode": "27447",
+                "serviceType": "Surgery",
+                "dateOfService": "2026-06-01"
+              }
+      responses:
+        '200':
+          description: Prior authorization requirement result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriorAuthCheckResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Member not found
+        '429':
+          description: Too many requests
+  /providers/v1/demographics:
+    get:
+      operationId: getProviderDemographics
+      summary: UnitedHealthcare Provider Demographics
+      description: >-
+        Retrieve demographic and credentialing information for healthcare providers
+        in the UnitedHealthcare network, including contact details, specialties,
+        network participation, and accepting new patients status.
+      tags:
+        - Providers
+      x-microcks-operation:
+        dispatcher: SCRIPT
+        dispatcherRules: "return 'FOUND';"
+      parameters:
+        - name: npi
+          in: query
+          required: true
+          description: National Provider Identifier (NPI) for the provider
+          schema:
+            type: string
+            pattern: '^\d{10}$'
+        - name: state
+          in: query
+          required: false
+          description: Two-letter state code to filter results
+          schema:
+            type: string
+            maxLength: 2
+      responses:
+        '200':
+          description: Provider demographic information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderDemographics'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Provider not found
+        '429':
+          description: Too many requests
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 Bearer token from UnitedHealthcare API Marketplace
+  schemas:
+    EligibilityRequest:
+      type: object
+      description: Request parameters for real-time eligibility verification
+      required:
+        - memberId
+        - dateOfBirth
+        - serviceType
+        - dateOfService
+      properties:
+        memberId:
+          type: string
+          description: UnitedHealthcare member ID
+        dateOfBirth:
+          type: string
+          format: date
+          description: Member date of birth (YYYY-MM-DD)
+        serviceType:
+          type: string
+          description: Service type code (X12 270/271 service type codes)
+        dateOfService:
+          type: string
+          format: date
+          description: Requested date of service
+        npi:
+          type: string
+          description: Rendering provider NPI
+        groupNumber:
+          type: string
+          description: Insurance group number
+    EligibilityResponse:
+      type: object
+      description: Real-time eligibility verification response
+      properties:
+        memberId:
+          type: string
+          description: UnitedHealthcare member ID
+        memberName:
+          type: string
+          description: Member full name
+        coverageStatus:
+          type: string
+          enum:
+            - ACTIVE
+            - INACTIVE
+            - TERMED
+          description: Current coverage status
+        planName:
+          type: string
+          description: Insurance plan name
+        groupNumber:
+          type: string
+          description: Group number
+        effectiveDate:
+          type: string
+          format: date
+          description: Coverage effective date
+        terminationDate:
+          type: string
+          format: date
+          description: Coverage termination date
+        deductible:
+          type: number
+          format: float
+          description: Annual deductible amount
+        deductibleMet:
+          type: number
+          format: float
+          description: Year-to-date deductible amount met
+        outOfPocketMax:
+          type: number
+          format: float
+          description: Annual out-of-pocket maximum
+        outOfPocketMet:
+          type: number
+          format: float
+          description: Year-to-date out-of-pocket amount met
+        copay:
+          type: number
+          format: float
+          description: Copay amount for the service type
+        coinsurance:
+          type: number
+          format: float
+          description: Coinsurance percentage (0-100)
+        networkStatus:
+          type: string
+          enum:
+            - IN_NETWORK
+            - OUT_OF_NETWORK
+            - UNKNOWN
+          description: Provider network participation status
+    BenefitCheckRequest:
+      type: object
+      description: Request for patient-specific benefit check
+      required:
+        - memberId
+        - dateOfBirth
+        - serviceCode
+        - dateOfService
+      properties:
+        memberId:
+          type: string
+          description: UnitedHealthcare member ID
+        dateOfBirth:
+          type: string
+          format: date
+          description: Member date of birth
+        serviceCode:
+          type: string
+          description: CPT/HCPCS service code
+        dateOfService:
+          type: string
+          format: date
+          description: Date of service
+        npi:
+          type: string
+          description: Rendering provider NPI
+        providerTaxId:
+          type: string
+          description: Provider tax ID
+        placeOfService:
+          type: string
+          description: Place of service code
+    BenefitCheckResponse:
+      type: object
+      description: Patient benefit check response
+      properties:
+        coveredBenefit:
+          type: boolean
+          description: Whether the service is a covered benefit
+        authorizationRequired:
+          type: boolean
+          description: Whether prior authorization is required
+        referralRequired:
+          type: boolean
+          description: Whether a referral is required
+        estimatedPatientResponsibility:
+          type: number
+          format: float
+          description: Estimated patient cost responsibility
+        estimatedPlanPayment:
+          type: number
+          format: float
+          description: Estimated plan payment amount
+        costSharingDetails:
+          type: object
+          description: Detailed cost-sharing breakdown
+          properties:
+            copay:
+              type: number
+              format: float
+            coinsurance:
+              type: number
+              format: float
+            deductibleApplies:
+              type: boolean
+    ClaimPreCheckRequest:
+      type: object
+      description: Request for claim pre-submission validation
+      required:
+        - memberId
+        - npi
+        - serviceDate
+        - diagnosisCodes
+        - procedureCodes
+      properties:
+        memberId:
+          type: string
+          description: Member ID
+        npi:
+          type: string
+          description: Billing provider NPI
+        serviceDate:
+          type: string
+          format: date
+          description: Date of service
+        diagnosisCodes:
+          type: array
+          description: ICD-10 diagnosis codes
+          items:
+            type: string
+        procedureCodes:
+          type: array
+          description: CPT/HCPCS procedure codes
+          items:
+            type: string
+        charges:
+          type: number
+          format: float
+          description: Total billed charges
+        placeOfService:
+          type: string
+          description: Place of service code
+    ClaimPreCheckResponse:
+      type: object
+      description: Claim pre-check validation result
+      properties:
+        validationStatus:
+          type: string
+          enum:
+            - VALID
+            - ERRORS
+            - WARNINGS
+          description: Overall validation status
+        errors:
+          type: array
+          description: Validation errors that will cause denial
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+        warnings:
+          type: array
+          description: Validation warnings that may cause issues
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+        estimatedPayment:
+          type: number
+          format: float
+          description: Estimated payment if claim is valid
+    ClaimInquiryRequest:
+      type: object
+      description: Request for claim status inquiry
+      properties:
+        claimNumber:
+          type: string
+          description: UHC claim number
+        npi:
+          type: string
+          description: Provider NPI
+        memberId:
+          type: string
+          description: Member ID
+        dateOfServiceFrom:
+          type: string
+          format: date
+          description: Start date for service date range
+        dateOfServiceTo:
+          type: string
+          format: date
+          description: End date for service date range
+    ClaimInquiryResponse:
+      type: object
+      description: Claim inquiry response
+      properties:
+        claimNumber:
+          type: string
+          description: UHC claim number
+        claimStatus:
+          type: string
+          enum:
+            - RECEIVED
+            - IN_PROCESS
+            - PROCESSED
+            - DENIED
+            - ADJUSTED
+            - REVERSED
+          description: Current claim status
+        serviceDate:
+          type: string
+          format: date
+          description: Date of service
+        billedAmount:
+          type: number
+          format: float
+          description: Total billed charges
+        allowedAmount:
+          type: number
+          format: float
+          description: Allowed amount
+        paidAmount:
+          type: number
+          format: float
+          description: Amount paid to provider
+        patientResponsibility:
+          type: number
+          format: float
+          description: Patient responsibility amount
+        paymentDate:
+          type: string
+          format: date
+          description: Date of payment
+        checkNumber:
+          type: string
+          description: Payment check or EFT trace number
+        denialReasonCode:
+          type: string
+          description: Reason code if claim was denied
+        denialReasonDescription:
+          type: string
+          description: Description of denial reason
+    PriorAuthCheckRequest:
+      type: object
+      description: Request to check prior authorization requirements
+      required:
+        - memberId
+        - npi
+        - serviceCode
+      properties:
+        memberId:
+          type: string
+          description: Member ID
+        npi:
+          type: string
+          description: Provider NPI
+        serviceCode:
+          type: string
+          description: CPT/HCPCS service code
+        serviceType:
+          type: string
+          description: Service type description
+        dateOfService:
+          type: string
+          format: date
+          description: Planned date of service
+        diagnosisCodes:
+          type: array
+          description: Supporting ICD-10 diagnosis codes
+          items:
+            type: string
+        placeOfService:
+          type: string
+          description: Place of service code
+    PriorAuthCheckResponse:
+      type: object
+      description: Prior authorization requirement response
+      properties:
+        authorizationRequired:
+          type: boolean
+          description: Whether prior authorization is required
+        authorizationStatus:
+          type: string
+          enum:
+            - NOT_REQUIRED
+            - REQUIRED
+            - APPROVED
+            - PENDING
+            - DENIED
+          description: Authorization status
+        authorizationNumber:
+          type: string
+          description: Authorization number if already approved
+        validFromDate:
+          type: string
+          format: date
+          description: Authorization valid from date
+        validToDate:
+          type: string
+          format: date
+          description: Authorization valid to date
+        approvedUnits:
+          type: integer
+          description: Number of approved units/visits
+        referralRequired:
+          type: boolean
+          description: Whether a referral is required
+    ProviderDemographics:
+      type: object
+      description: Healthcare provider demographic and credentialing information
+      properties:
+        npi:
+          type: string
+          description: National Provider Identifier
+        firstName:
+          type: string
+          description: Provider first name
+        lastName:
+          type: string
+          description: Provider last name
+        organizationName:
+          type: string
+          description: Organization name (for group practices)
+        providerType:
+          type: string
+          enum:
+            - INDIVIDUAL
+            - ORGANIZATION
+          description: Provider type
+        specialty:
+          type: string
+          description: Primary specialty
+        subspecialties:
+          type: array
+          description: List of subspecialties
+          items:
+            type: string
+        networkStatus:
+          type: string
+          enum:
+            - IN_NETWORK
+            - OUT_OF_NETWORK
+          description: Network participation status
+        acceptingNewPatients:
+          type: boolean
+          description: Whether accepting new patients
+        address:
+          type: object
+          description: Practice address
+          properties:
+            street1:
+              type: string
+            street2:
+              type: string
+            city:
+              type: string
+            state:
+              type: string
+            zip:
+              type: string
+        phone:
+          type: string
+          description: Office phone number
+        languages:
+          type: array
+          description: Languages spoken
+          items:
+            type: string
+        boardCertifications:
+          type: array
+          description: Board certifications
+          items:
+            type: string

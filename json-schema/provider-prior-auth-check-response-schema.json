@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unitedhealthcare/refs/heads/main/json-schema/provider-prior-auth-check-response-schema.json",
+  "title": "UnitedHealthcare Prior Auth Check Response",
+  "description": "Prior authorization requirement and status response",
+  "type": "object",
+  "properties": {
+    "authorizationRequired": {
+      "type": "boolean",
+      "description": "Whether prior auth is required"
+    },
+    "authorizationStatus": {
+      "type": "string",
+      "enum": [
+        "NOT_REQUIRED",
+        "REQUIRED",
+        "APPROVED",
+        "PENDING",
+        "DENIED"
+      ],
+      "description": "Authorization status"
+    },
+    "authorizationNumber": {
+      "type": "string",
+      "description": "Authorization number"
+    },
+    "validFromDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Auth valid from"
+    },
+    "validToDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Auth valid to"
+    },
+    "approvedUnits": {
+      "type": "integer",
+      "description": "Approved units/visits"
+    },
+    "referralRequired": {
+      "type": "boolean",
+      "description": "Referral required"
+    }
+  }
+}

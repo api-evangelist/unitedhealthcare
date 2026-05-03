@@ -1,0 +1,147 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "UnitedHealthcare Provider Operations"
+  description: >-
+    Workflow capability for healthcare providers using UnitedHealthcare APIs to verify
+    member eligibility, manage claims, check prior authorizations, and access the provider
+    directory. Supports revenue cycle management, point-of-care eligibility, and clinical
+    workflow automation for practices, hospitals, and health IT systems.
+  tags:
+    - UnitedHealthcare
+    - Healthcare Provider
+    - Eligibility
+    - Claims Management
+    - Prior Authorization
+    - Revenue Cycle
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      UHC_BEARER_TOKEN: UHC_BEARER_TOKEN
+
+capability:
+  consumes:
+    - import: uhc-provider
+      location: ./shared/provider-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: provider-operations-api
+      description: "Unified REST API for UnitedHealthcare provider operations."
+      resources:
+        - path: /v1/eligibility
+          name: eligibility
+          description: "Member eligibility verification."
+          operations:
+            - method: POST
+              name: check-eligibility
+              description: "Check member eligibility."
+              call: "uhc-provider.check-eligibility"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: check-benefit
+              description: "Check patient benefit details."
+              call: "uhc-provider.check-patient-benefit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/claims
+          name: claims
+          description: "Claims management."
+          operations:
+            - method: POST
+              name: inquire-claim
+              description: "Inquire claim status."
+              call: "uhc-provider.inquire-claim"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/prior-auth
+          name: prior-auth
+          description: "Prior authorization management."
+          operations:
+            - method: POST
+              name: check-prior-auth
+              description: "Check prior auth requirements."
+              call: "uhc-provider.check-prior-auth"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/providers
+          name: providers
+          description: "Provider directory."
+          operations:
+            - method: GET
+              name: get-provider
+              description: "Get provider demographics."
+              call: "uhc-provider.get-provider-demographics"
+              with:
+                npi: "rest.npi"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: provider-operations-mcp
+      transport: http
+      description: "MCP server for AI-assisted UnitedHealthcare provider operations."
+      tools:
+        - name: verify-member-eligibility
+          description: "Verify UnitedHealthcare member eligibility and coverage details at point of care including deductible, copay, and network status."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "uhc-provider.check-eligibility"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: check-patient-benefit
+          description: "Check patient-specific benefit details for a service code including whether authorization is required and estimated cost-sharing."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "uhc-provider.check-patient-benefit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-claim-status
+          description: "Look up UnitedHealthcare claim status, payment details, and denial reasons by claim number or member ID."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "uhc-provider.inquire-claim"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: check-prior-authorization
+          description: "Determine if prior authorization is required for a procedure and check current authorization status to prevent avoidable denials."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "uhc-provider.check-prior-auth"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: find-provider
+          description: "Search UnitedHealthcare provider directory for in-network physicians and organizations by NPI or state."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "uhc-provider.get-provider-demographics"
+          with:
+            npi: "tools.npi"
+            state: "tools.state"
+          outputParameters:
+            - type: object
+              mapping: "$."

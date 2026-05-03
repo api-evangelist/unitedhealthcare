@@ -1,0 +1,360 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "UnitedHealthcare"
+  description: "Unified taxonomy for UnitedHealthcare provider and interoperability APIs covering eligibility, claims, prior authorization, FHIR patient access, and provider directory."
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+operational:
+  apis:
+    - namespace: uhc-provider
+      version: "1.0"
+      baseUrl: https://api.uhcprovider.com
+      status: active
+    - namespace: uhc-fhir
+      version: "R4"
+      baseUrl: https://api.uhc.com/fhir/R4
+      status: active
+
+  resources:
+    - name: eligibility
+      apis:
+        - uhc-provider
+      actions:
+        - check
+        - benefit-check
+    - name: claims
+      apis:
+        - uhc-provider
+      actions:
+        - inquire
+        - pre-check
+    - name: prior-auth
+      apis:
+        - uhc-provider
+      actions:
+        - check
+    - name: providers
+      apis:
+        - uhc-provider
+        - uhc-fhir
+      actions:
+        - get
+        - list
+    - name: patient
+      apis:
+        - uhc-fhir
+      actions:
+        - get
+    - name: explanation-of-benefit
+      apis:
+        - uhc-fhir
+      actions:
+        - list
+    - name: coverage
+      apis:
+        - uhc-fhir
+      actions:
+        - list
+
+  actions:
+    - name: check
+      httpMethod: POST
+      pattern: write
+    - name: benefit-check
+      httpMethod: POST
+      pattern: write
+    - name: inquire
+      httpMethod: POST
+      pattern: write
+    - name: pre-check
+      httpMethod: POST
+      pattern: write
+    - name: get
+      httpMethod: GET
+      pattern: read
+    - name: list
+      httpMethod: GET
+      pattern: read
+
+  schemas:
+    core:
+      - name: EligibilityResponse
+        api: uhc-provider
+        keyProperties:
+          - memberId
+          - coverageStatus
+          - planName
+          - deductible
+          - deductibleMet
+          - outOfPocketMax
+          - copay
+          - coinsurance
+          - networkStatus
+      - name: ClaimInquiryResponse
+        api: uhc-provider
+        keyProperties:
+          - claimNumber
+          - claimStatus
+          - billedAmount
+          - allowedAmount
+          - paidAmount
+          - patientResponsibility
+          - paymentDate
+          - denialReasonCode
+      - name: PriorAuthCheckResponse
+        api: uhc-provider
+        keyProperties:
+          - authorizationRequired
+          - authorizationStatus
+          - authorizationNumber
+          - validFromDate
+          - validToDate
+          - approvedUnits
+      - name: ProviderDemographics
+        api: uhc-provider
+        keyProperties:
+          - npi
+          - firstName
+          - lastName
+          - specialty
+          - networkStatus
+          - acceptingNewPatients
+      - name: FHIRPatient
+        api: uhc-fhir
+        keyProperties:
+          - resourceType
+          - id
+          - identifier
+          - name
+          - birthDate
+          - gender
+      - name: FHIRBundle
+        api: uhc-fhir
+        keyProperties:
+          - resourceType
+          - id
+          - type
+          - total
+          - entry
+
+  enums:
+    coverageStatus:
+      - ACTIVE
+      - INACTIVE
+      - TERMED
+    claimStatus:
+      - RECEIVED
+      - IN_PROCESS
+      - PROCESSED
+      - DENIED
+      - ADJUSTED
+      - REVERSED
+    authorizationStatus:
+      - NOT_REQUIRED
+      - REQUIRED
+      - APPROVED
+      - PENDING
+      - DENIED
+    networkStatus:
+      - IN_NETWORK
+      - OUT_OF_NETWORK
+      - UNKNOWN
+    validationStatus:
+      - VALID
+      - ERRORS
+      - WARNINGS
+    fhirGender:
+      - male
+      - female
+      - other
+      - unknown
+    fhirBundleType:
+      - searchset
+      - collection
+      - document
+
+  authentication:
+    schemes:
+      - type: bearer
+        name: bearerAuth
+        description: OAuth 2.0 Bearer token for UnitedHealthcare APIs
+        apisUsing:
+          - uhc-provider
+          - uhc-fhir
+
+capability:
+  workflows:
+    - name: provider-operations
+      file: capabilities/provider-operations.yaml
+      description: Healthcare provider workflow for eligibility, claims, prior authorization, and provider directory
+      apisCombined:
+        - uhc-provider
+      toolCount: 5
+      personas:
+        - healthcare-provider
+        - billing-specialist
+        - prior-auth-coordinator
+      domains:
+        - Revenue Cycle Management
+        - Clinical Operations
+    - name: patient-data-access
+      file: capabilities/patient-data-access.yaml
+      description: FHIR-based patient data access workflow for claims history, coverage, and provider directory
+      apisCombined:
+        - uhc-fhir
+      toolCount: 4
+      personas:
+        - patient
+        - care-coordinator
+        - health-app-developer
+      domains:
+        - Patient Engagement
+        - Health Data Exchange
+
+  personas:
+    - id: healthcare-provider
+      name: Healthcare Provider
+      description: Physician or clinical staff verifying eligibility and managing prior authorizations at point of care
+      workflows:
+        - provider-operations
+    - id: billing-specialist
+      name: Billing Specialist
+      description: Medical billing staff managing claim submission, status inquiry, and revenue cycle workflows
+      workflows:
+        - provider-operations
+    - id: prior-auth-coordinator
+      name: Prior Authorization Coordinator
+      description: Clinical staff coordinating prior authorization requests and tracking approval status
+      workflows:
+        - provider-operations
+    - id: patient
+      name: Patient
+      description: UnitedHealthcare member accessing their health data through patient portals or apps
+      workflows:
+        - patient-data-access
+    - id: care-coordinator
+      name: Care Coordinator
+      description: Care management professional accessing member health history for care coordination
+      workflows:
+        - patient-data-access
+    - id: health-app-developer
+      name: Health App Developer
+      description: Developer building patient-facing applications using FHIR interoperability APIs
+      workflows:
+        - patient-data-access
+
+  domains:
+    - name: Revenue Cycle Management
+      description: Claims submission, eligibility verification, and payment management workflows
+      resources:
+        - eligibility
+        - claims
+        - prior-auth
+    - name: Clinical Operations
+      description: Prior authorization, provider directory, and point-of-care clinical support
+      resources:
+        - prior-auth
+        - providers
+    - name: Patient Engagement
+      description: Member-facing health data access and patient portal integration
+      resources:
+        - patient
+        - explanation-of-benefit
+        - coverage
+    - name: Health Data Exchange
+      description: FHIR-based interoperability for health information exchange
+      resources:
+        - patient
+        - explanation-of-benefit
+        - providers
+
+  namespaces:
+    consumed:
+      - name: uhc-provider
+        type: http
+        baseUri: https://api.uhcprovider.com
+      - name: uhc-fhir
+        type: http
+        baseUri: https://api.uhc.com/fhir/R4
+    restExposed:
+      - name: provider-operations-api
+        port: 8080
+      - name: patient-data-access-api
+        port: 8081
+    mcpExposed:
+      - name: provider-operations-mcp
+        port: 9090
+      - name: patient-data-access-mcp
+        port: 9091
+
+  binds:
+    - name: UHC_BEARER_TOKEN
+      description: OAuth 2.0 Bearer token for UnitedHealthcare Provider API
+      workflows:
+        - provider-operations
+    - name: UHC_FHIR_TOKEN
+      description: OAuth 2.0 Bearer token for UnitedHealthcare FHIR Interoperability API
+      workflows:
+        - patient-data-access
+
+crossReference:
+  - resource: eligibility
+    operations:
+      - check-eligibility
+      - check-patient-benefit
+    workflows:
+      - provider-operations
+    personas:
+      - healthcare-provider
+      - billing-specialist
+  - resource: claims
+    operations:
+      - inquire-claim
+      - pre-check-claim
+    workflows:
+      - provider-operations
+    personas:
+      - billing-specialist
+  - resource: prior-auth
+    operations:
+      - check-prior-auth
+    workflows:
+      - provider-operations
+    personas:
+      - prior-auth-coordinator
+      - healthcare-provider
+  - resource: providers
+    operations:
+      - get-provider-demographics
+      - list-practitioners
+    workflows:
+      - provider-operations
+      - patient-data-access
+    personas:
+      - healthcare-provider
+      - care-coordinator
+  - resource: patient
+    operations:
+      - get-patient
+    workflows:
+      - patient-data-access
+    personas:
+      - patient
+      - care-coordinator
+  - resource: explanation-of-benefit
+    operations:
+      - list-eobs
+    workflows:
+      - patient-data-access
+    personas:
+      - patient
+      - care-coordinator
+  - resource: coverage
+    operations:
+      - list-coverage
+    workflows:
+      - patient-data-access
+    personas:
+      - patient

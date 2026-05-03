@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unitedhealthcare/refs/heads/main/json-structure/interoperability-fhir-bundle-structure.json",
+  "name": "UnitedHealthcare FHIR Bundle",
+  "type": "object",
+  "description": "FHIR R4 Bundle resource containing a collection of FHIR resources for patient access and provider directory",
+  "fields": [
+    {
+      "name": "resourceType",
+      "type": "string",
+      "description": "FHIR resource type",
+      "enum": [
+        "Bundle"
+      ]
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "description": "Bundle ID"
+    },
+    {
+      "name": "type",
+      "type": "string",
+      "description": "Bundle type",
+      "enum": [
+        "searchset",
+        "collection",
+        "document"
+      ]
+    },
+    {
+      "name": "total",
+      "type": "integer",
+      "description": "Total matching resources"
+    },
+    {
+      "name": "link",
+      "type": "array",
+      "description": "Navigation links",
+      "items": {
+        "type": "object"
+      }
+    },
+    {
+      "name": "entry",
+      "type": "array",
+      "description": "Bundle entries",
+      "items": {
+        "type": "object"
+      }
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "npi": "1234567890",
+  "firstName": "Robert",
+  "lastName": "Chen",
+  "organizationName": null,
+  "providerType": "INDIVIDUAL",
+  "specialty": "Internal Medicine",
+  "subspecialties": [
+    "Cardiology Consultation"
+  ],
+  "networkStatus": "IN_NETWORK",
+  "acceptingNewPatients": true,
+  "address": {
+    "street1": "1234 Medical Center Drive",
+    "street2": "Suite 300",
+    "city": "Minneapolis",
+    "state": "MN",
+    "zip": "55401"
+  },
+  "phone": "612-555-0100",
+  "languages": [
+    "English",
+    "Mandarin Chinese"
+  ],
+  "boardCertifications": [
+    "American Board of Internal Medicine"
+  ]
+}

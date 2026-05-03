@@ -1,0 +1,11 @@
+{
+  "validationStatus": "VALID",
+  "errors": [],
+  "warnings": [
+    {
+      "code": "W-007",
+      "message": "Modifier may be required for this procedure code in some scenarios"
+    }
+  ],
+  "estimatedPayment": 95.5
+}

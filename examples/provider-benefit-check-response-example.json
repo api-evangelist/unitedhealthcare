@@ -1,0 +1,12 @@
+{
+  "coveredBenefit": true,
+  "authorizationRequired": false,
+  "referralRequired": false,
+  "estimatedPatientResponsibility": 30.0,
+  "estimatedPlanPayment": 120.0,
+  "costSharingDetails": {
+    "copay": 30.0,
+    "coinsurance": 0.0,
+    "deductibleApplies": false
+  }
+}

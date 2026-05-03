@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unitedhealthcare/refs/heads/main/json-structure/provider-demographics-structure.json",
+  "name": "UnitedHealthcare Provider Demographics",
+  "type": "object",
+  "description": "Healthcare provider demographic and credentialing information",
+  "fields": [
+    {
+      "name": "npi",
+      "type": "string",
+      "description": "National Provider Identifier"
+    },
+    {
+      "name": "firstName",
+      "type": "string",
+      "description": "Provider first name"
+    },
+    {
+      "name": "lastName",
+      "type": "string",
+      "description": "Provider last name"
+    },
+    {
+      "name": "organizationName",
+      "type": "string",
+      "description": "Organization name"
+    },
+    {
+      "name": "providerType",
+      "type": "string",
+      "description": "Provider type",
+      "enum": [
+        "INDIVIDUAL",
+        "ORGANIZATION"
+      ]
+    },
+    {
+      "name": "specialty",
+      "type": "string",
+      "description": "Primary specialty"
+    },
+    {
+      "name": "subspecialties",
+      "type": "array",
+      "description": "Subspecialties",
+      "items": {
+        "type": "string"
+      }
+    },
+    {
+      "name": "networkStatus",
+      "type": "string",
+      "description": "Network status",
+      "enum": [
+        "IN_NETWORK",
+        "OUT_OF_NETWORK"
+      ]
+    },
+    {
+      "name": "acceptingNewPatients",
+      "type": "boolean",
+      "description": "Accepting new patients"
+    },
+    {
+      "name": "address",
+      "type": "object",
+      "description": "Practice address"
+    },
+    {
+      "name": "phone",
+      "type": "string",
+      "description": "Office phone number"
+    },
+    {
+      "name": "languages",
+      "type": "array",
+      "description": "Languages spoken",
+      "items": {
+        "type": "string"
+      }
+    },
+    {
+      "name": "boardCertifications",
+      "type": "array",
+      "description": "Board certifications",
+      "items": {
+        "type": "string"
+      }
+    }
+  ]
+}

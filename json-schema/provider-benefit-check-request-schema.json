@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unitedhealthcare/refs/heads/main/json-schema/provider-benefit-check-request-schema.json",
+  "title": "UnitedHealthcare Benefit Check Request",
+  "description": "Request for patient-specific benefit and cost-sharing check",
+  "type": "object",
+  "required": [
+    "memberId",
+    "dateOfBirth",
+    "serviceCode",
+    "dateOfService"
+  ],
+  "properties": {
+    "memberId": {
+      "type": "string",
+      "description": "Member ID"
+    },
+    "dateOfBirth": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of birth"
+    },
+    "serviceCode": {
+      "type": "string",
+      "description": "CPT/HCPCS service code"
+    },
+    "dateOfService": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of service"
+    },
+    "npi": {
+      "type": "string",
+      "description": "Provider NPI"
+    },
+    "providerTaxId": {
+      "type": "string",
+      "description": "Provider tax ID"
+    },
+    "placeOfService": {
+      "type": "string",
+      "description": "Place of service code"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/unitedhealthcare/refs/heads/main/json-structure/provider-benefit-check-response-structure.json",
+  "name": "UnitedHealthcare Benefit Check Response",
+  "type": "object",
+  "description": "Patient benefit check response with cost-sharing details",
+  "fields": [
+    {
+      "name": "coveredBenefit",
+      "type": "boolean",
+      "description": "Whether service is covered"
+    },
+    {
+      "name": "authorizationRequired",
+      "type": "boolean",
+      "description": "Prior auth required"
+    },
+    {
+      "name": "referralRequired",
+      "type": "boolean",
+      "description": "Referral required"
+    },
+    {
+      "name": "estimatedPatientResponsibility",
+      "type": "decimal",
+      "description": "Estimated patient cost"
+    },
+    {
+      "name": "estimatedPlanPayment",
+      "type": "decimal",
+      "description": "Estimated plan payment"
+    },
+    {
+      "name": "costSharingDetails",
+      "type": "object",
+      "description": "Cost-sharing breakdown"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "memberId": "987654321",
+  "memberName": "Jane Smith",
+  "coverageStatus": "ACTIVE",
+  "planName": "UnitedHealthcare Choice Plus PPO",
+  "groupNumber": "GRP-001234",
+  "effectiveDate": "2026-01-01",
+  "terminationDate": null,
+  "deductible": 1500.0,
+  "deductibleMet": 450.0,
+  "outOfPocketMax": 4500.0,
+  "outOfPocketMet": 450.0,
+  "copay": 30.0,
+  "coinsurance": 20.0,
+  "networkStatus": "IN_NETWORK"
+}

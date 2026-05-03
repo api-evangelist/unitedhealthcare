@@ -1,0 +1,9 @@
+{
+  "authorizationRequired": false,
+  "authorizationStatus": "NOT_REQUIRED",
+  "authorizationNumber": null,
+  "validFromDate": null,
+  "validToDate": null,
+  "approvedUnits": null,
+  "referralRequired": false
+}
