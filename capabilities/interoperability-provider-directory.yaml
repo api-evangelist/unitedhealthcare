@@ -1,0 +1,157 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: UnitedHealthcare Interoperability API — Provider Directory
+  description: 'UnitedHealthcare Interoperability API — Provider Directory. 2 operations. Lead operation: UnitedHealthcare
+    List Organizations in Directory. Self-contained Naftiko capability covering one Unitedhealthcare business surface.'
+  tags:
+  - Unitedhealthcare
+  - Provider Directory
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITEDHEALTHCARE_API_KEY: UNITEDHEALTHCARE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: interoperability-provider-directory
+    baseUri: https://api.uhc.com/fhir/R4
+    description: UnitedHealthcare Interoperability API — Provider Directory business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: Organization
+      path: /Organization
+      operations:
+      - name: listorganizations
+        method: GET
+        description: UnitedHealthcare List Organizations in Directory
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: Organization name search string
+        - name: type
+          in: query
+          type: string
+          description: Organization type code
+        - name: address-state
+          in: query
+          type: string
+          description: State code for location filter
+        - name: _count
+          in: query
+          type: integer
+          description: Maximum number of results
+    - name: Practitioner
+      path: /Practitioner
+      operations:
+      - name: listpractitioners
+        method: GET
+        description: UnitedHealthcare List Practitioners in Directory
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: Provider name search string
+        - name: specialty
+          in: query
+          type: string
+          description: NUCC taxonomy code for specialty
+        - name: address-state
+          in: query
+          type: string
+          description: State code for location filter
+        - name: _count
+          in: query
+          type: integer
+          description: Maximum number of results
+    authentication:
+      type: bearer
+      token: '{{env.UNITEDHEALTHCARE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: interoperability-provider-directory-rest
+    port: 8080
+    description: REST adapter for UnitedHealthcare Interoperability API — Provider Directory. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/organization
+      name: organization
+      description: REST surface for Organization.
+      operations:
+      - method: GET
+        name: listorganizations
+        description: UnitedHealthcare List Organizations in Directory
+        call: interoperability-provider-directory.listorganizations
+        with:
+          name: rest.name
+          type: rest.type
+          address-state: rest.address-state
+          _count: rest._count
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/practitioner
+      name: practitioner
+      description: REST surface for Practitioner.
+      operations:
+      - method: GET
+        name: listpractitioners
+        description: UnitedHealthcare List Practitioners in Directory
+        call: interoperability-provider-directory.listpractitioners
+        with:
+          name: rest.name
+          specialty: rest.specialty
+          address-state: rest.address-state
+          _count: rest._count
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: interoperability-provider-directory-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for UnitedHealthcare Interoperability API — Provider Directory. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: unitedhealthcare-list-organizations-directory
+      description: UnitedHealthcare List Organizations in Directory
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: interoperability-provider-directory.listorganizations
+      with:
+        name: tools.name
+        type: tools.type
+        address-state: tools.address-state
+        _count: tools._count
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unitedhealthcare-list-practitioners-directory
+      description: UnitedHealthcare List Practitioners in Directory
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: interoperability-provider-directory.listpractitioners
+      with:
+        name: tools.name
+        specialty: tools.specialty
+        address-state: tools.address-state
+        _count: tools._count
+      outputParameters:
+      - type: object
+        mapping: $.

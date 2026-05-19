@@ -1,0 +1,188 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: UnitedHealthcare Interoperability API — Patient Access
+  description: 'UnitedHealthcare Interoperability API — Patient Access. 3 operations. Lead operation: UnitedHealthcare List
+    Coverage. Self-contained Naftiko capability covering one Unitedhealthcare business surface.'
+  tags:
+  - Unitedhealthcare
+  - Patient Access
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITEDHEALTHCARE_API_KEY: UNITEDHEALTHCARE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: interoperability-patient-access
+    baseUri: https://api.uhc.com/fhir/R4
+    description: UnitedHealthcare Interoperability API — Patient Access business capability. Self-contained, no shared references.
+    resources:
+    - name: Coverage
+      path: /Coverage
+      operations:
+      - name: listcoverage
+        method: GET
+        description: UnitedHealthcare List Coverage
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: patient
+          in: query
+          type: string
+          description: Patient resource ID
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Coverage status filter (active, cancelled, draft)
+    - name: ExplanationOfBenefit
+      path: /ExplanationOfBenefit
+      operations:
+      - name: listexplanationofbenefit
+        method: GET
+        description: UnitedHealthcare List Explanation of Benefits
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: patient
+          in: query
+          type: string
+          description: Patient resource ID to retrieve EOBs for
+          required: true
+        - name: _lastUpdated
+          in: query
+          type: string
+          description: Filter by last updated date (FHIR date parameter)
+        - name: type
+          in: query
+          type: string
+          description: Filter by claim type (professional, institutional, pharmacy)
+        - name: _count
+          in: query
+          type: integer
+          description: Maximum number of results to return
+    - name: Patient-id
+      path: /Patient/{id}
+      operations:
+      - name: getpatient
+        method: GET
+        description: UnitedHealthcare Get Patient Demographics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: FHIR Patient resource ID (member ID)
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.UNITEDHEALTHCARE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: interoperability-patient-access-rest
+    port: 8080
+    description: REST adapter for UnitedHealthcare Interoperability API — Patient Access. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/coverage
+      name: coverage
+      description: REST surface for Coverage.
+      operations:
+      - method: GET
+        name: listcoverage
+        description: UnitedHealthcare List Coverage
+        call: interoperability-patient-access.listcoverage
+        with:
+          patient: rest.patient
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/explanationofbenefit
+      name: explanationofbenefit
+      description: REST surface for ExplanationOfBenefit.
+      operations:
+      - method: GET
+        name: listexplanationofbenefit
+        description: UnitedHealthcare List Explanation of Benefits
+        call: interoperability-patient-access.listexplanationofbenefit
+        with:
+          patient: rest.patient
+          _lastUpdated: rest._lastUpdated
+          type: rest.type
+          _count: rest._count
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/patient/{id}
+      name: patient-id
+      description: REST surface for Patient-id.
+      operations:
+      - method: GET
+        name: getpatient
+        description: UnitedHealthcare Get Patient Demographics
+        call: interoperability-patient-access.getpatient
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: interoperability-patient-access-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for UnitedHealthcare Interoperability API — Patient Access. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: unitedhealthcare-list-coverage
+      description: UnitedHealthcare List Coverage
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: interoperability-patient-access.listcoverage
+      with:
+        patient: tools.patient
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unitedhealthcare-list-explanation-benefits
+      description: UnitedHealthcare List Explanation of Benefits
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: interoperability-patient-access.listexplanationofbenefit
+      with:
+        patient: tools.patient
+        _lastUpdated: tools._lastUpdated
+        type: tools.type
+        _count: tools._count
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unitedhealthcare-get-patient-demographics
+      description: UnitedHealthcare Get Patient Demographics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: interoperability-patient-access.getpatient
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

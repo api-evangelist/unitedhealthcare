@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: UnitedHealthcare Provider API — Eligibility
+  description: 'UnitedHealthcare Provider API — Eligibility. 2 operations. Lead operation: UnitedHealthcare Real Patient Benefit
+    Check. Self-contained Naftiko capability covering one Unitedhealthcare business surface.'
+  tags:
+  - Unitedhealthcare
+  - Eligibility
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNITEDHEALTHCARE_API_KEY: UNITEDHEALTHCARE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: provider-eligibility
+    baseUri: https://api.uhcprovider.com
+    description: UnitedHealthcare Provider API — Eligibility business capability. Self-contained, no shared references.
+    resources:
+    - name: eligibility-v1-patient-benefit-check
+      path: /eligibility/v1/patient-benefit-check
+      operations:
+      - name: checkpatientbenefit
+        method: POST
+        description: UnitedHealthcare Real Patient Benefit Check
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: eligibility-v1-real-time
+      path: /eligibility/v1/real-time
+      operations:
+      - name: checkeligibility
+        method: POST
+        description: UnitedHealthcare Real-Time Eligibility Check
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.UNITEDHEALTHCARE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: provider-eligibility-rest
+    port: 8080
+    description: REST adapter for UnitedHealthcare Provider API — Eligibility. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/eligibility/v1/patient-benefit-check
+      name: eligibility-v1-patient-benefit-check
+      description: REST surface for eligibility-v1-patient-benefit-check.
+      operations:
+      - method: POST
+        name: checkpatientbenefit
+        description: UnitedHealthcare Real Patient Benefit Check
+        call: provider-eligibility.checkpatientbenefit
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/eligibility/v1/real-time
+      name: eligibility-v1-real-time
+      description: REST surface for eligibility-v1-real-time.
+      operations:
+      - method: POST
+        name: checkeligibility
+        description: UnitedHealthcare Real-Time Eligibility Check
+        call: provider-eligibility.checkeligibility
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: provider-eligibility-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for UnitedHealthcare Provider API — Eligibility. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: unitedhealthcare-real-patient-benefit-check
+      description: UnitedHealthcare Real Patient Benefit Check
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: provider-eligibility.checkpatientbenefit
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unitedhealthcare-real-time-eligibility-check
+      description: UnitedHealthcare Real-Time Eligibility Check
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: provider-eligibility.checkeligibility
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
