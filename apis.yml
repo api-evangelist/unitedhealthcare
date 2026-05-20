@@ -19,6 +19,11 @@ created: '2025-03-01'
 modified: '2026-05-19'
 position: Consuming
 specificationVersion: '0.19'
+common:
+  - type: GitHubOrganization
+    url: https://github.com/UnitedHealthCare
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/unitedhealthcare
 apis:
 - aid: unitedhealthcare:provider-api
   name: UnitedHealthcare Provider API
