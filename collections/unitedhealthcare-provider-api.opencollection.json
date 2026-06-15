@@ -1,0 +1,148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UnitedHealthcare Provider API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Eligibility",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "UnitedHealthcare Real-Time Eligibility Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.uhcprovider.com/eligibility/v1/real-time",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform a real-time pre-service eligibility and benefit verification for a UnitedHealthcare member. Returns coverage details, deductibles, copays, and benefit limits for a specific service type and date of service."
+        },
+        {
+          "info": {
+            "name": "UnitedHealthcare Real Patient Benefit Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.uhcprovider.com/eligibility/v1/patient-benefit-check",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Check specific patient benefit details for a given service including covered benefits, cost-sharing information, network status, and utilization management requirements."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Claims",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "UnitedHealthcare Real Claim Pre-Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.uhcprovider.com/claims/v1/pre-check",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate a claim before submission to identify potential issues including missing information, coverage gaps, authorization requirements, and billing edits. Reduces claim denials and accelerates payment."
+        },
+        {
+          "info": {
+            "name": "UnitedHealthcare Real Claim Inquiry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.uhcprovider.com/claims/v1/inquiry",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve the status and details of submitted claims including payment information, denial reasons, adjustment codes, and explanation of benefits data for a member or provider."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Prior Authorization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "UnitedHealthcare Real Prior Auth Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.uhcprovider.com/prior-auth/v1/check",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Check if a prior authorization or referral is required for a specific service and procedure, and determine the authorization status for a UnitedHealthcare member."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "UnitedHealthcare Provider Demographics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.uhcprovider.com/providers/v1/demographics",
+            "params": [
+              {
+                "name": "npi",
+                "value": "",
+                "type": "query",
+                "description": "National Provider Identifier (NPI) for the provider"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Two-letter state code to filter results"
+              }
+            ]
+          },
+          "docs": "Retrieve demographic and credentialing information for healthcare providers in the UnitedHealthcare network, including contact details, specialties, network participation, and accepting new patients status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

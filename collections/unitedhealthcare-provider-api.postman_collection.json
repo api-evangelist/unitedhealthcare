@@ -1,0 +1,1873 @@
+{
+  "item": [
+    {
+      "id": "d2b14eea-09fc-4655-b67e-0c921f00570e",
+      "name": "Eligibility",
+      "description": {
+        "content": "Real-time eligibility and benefit verification",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a5076175-aaae-4bf7-99d3-1c14c05e0e4b",
+          "name": "UnitedHealthcare Real-Time Eligibility Check",
+          "request": {
+            "name": "UnitedHealthcare Real-Time Eligibility Check",
+            "description": {
+              "content": "Perform a real-time pre-service eligibility and benefit verification for a UnitedHealthcare member. Returns coverage details, deductibles, copays, and benefit limits for a specific service type and date of service.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "eligibility",
+                "v1",
+                "real-time"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"memberId\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"serviceType\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"npi\": \"<string>\",\n  \"groupNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "92a8fca1-8a88-4267-a8aa-d275f34a6064",
+              "name": "Eligibility verification result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eligibility",
+                    "v1",
+                    "real-time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"serviceType\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"npi\": \"<string>\",\n  \"groupNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"memberId\": \"string\",\n  \"memberName\": \"string\",\n  \"coverageStatus\": \"INACTIVE\",\n  \"planName\": \"string\",\n  \"groupNumber\": \"string\",\n  \"effectiveDate\": \"1956-02-12\",\n  \"terminationDate\": \"1981-01-24\",\n  \"deductible\": 9693.90129035961,\n  \"deductibleMet\": 4389.147792326583,\n  \"outOfPocketMax\": 4650.523409920352,\n  \"outOfPocketMet\": 2005.1778982212,\n  \"copay\": 5805.506800188584,\n  \"coinsurance\": 493.6805088199614,\n  \"networkStatus\": \"IN_NETWORK\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1ac125f-e10b-4963-a5a9-49ab86f7e47e",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eligibility",
+                    "v1",
+                    "real-time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"serviceType\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"npi\": \"<string>\",\n  \"groupNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e26861a0-c3bb-4239-a6fe-11ab113b60b0",
+              "name": "Unauthorized - invalid or missing token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eligibility",
+                    "v1",
+                    "real-time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"serviceType\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"npi\": \"<string>\",\n  \"groupNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "38e11e63-6e3d-47c4-aebb-35e630fbb597",
+              "name": "Member not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eligibility",
+                    "v1",
+                    "real-time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"serviceType\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"npi\": \"<string>\",\n  \"groupNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "14a11378-c983-4d4e-83ea-1200bf07b2cb",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eligibility",
+                    "v1",
+                    "real-time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"serviceType\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"npi\": \"<string>\",\n  \"groupNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4cd90681-fb65-46a5-972a-0fac258a764a",
+          "name": "UnitedHealthcare Real Patient Benefit Check",
+          "request": {
+            "name": "UnitedHealthcare Real Patient Benefit Check",
+            "description": {
+              "content": "Check specific patient benefit details for a given service including covered benefits, cost-sharing information, network status, and utilization management requirements.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "eligibility",
+                "v1",
+                "patient-benefit-check"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"memberId\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"serviceCode\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"npi\": \"<string>\",\n  \"providerTaxId\": \"<string>\",\n  \"placeOfService\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0218697c-9bc5-4d42-9721-325e15315071",
+              "name": "Benefit check result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eligibility",
+                    "v1",
+                    "patient-benefit-check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"serviceCode\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"npi\": \"<string>\",\n  \"providerTaxId\": \"<string>\",\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"coveredBenefit\": true,\n  \"authorizationRequired\": true,\n  \"referralRequired\": true,\n  \"estimatedPatientResponsibility\": 3760.4806877907827,\n  \"estimatedPlanPayment\": 393.50892008673924,\n  \"costSharingDetails\": {\n    \"copay\": 4175.673869707909,\n    \"coinsurance\": 1897.2540131768124,\n    \"deductibleApplies\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a0687fa-49c9-4554-964f-8dab0d5cdd4e",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eligibility",
+                    "v1",
+                    "patient-benefit-check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"serviceCode\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"npi\": \"<string>\",\n  \"providerTaxId\": \"<string>\",\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "333790ef-118e-4be7-95ef-7e607a36225e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eligibility",
+                    "v1",
+                    "patient-benefit-check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"serviceCode\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"npi\": \"<string>\",\n  \"providerTaxId\": \"<string>\",\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d2cb1190-3d7e-4bad-a0ed-d1dd4c64ffa9",
+              "name": "Member not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eligibility",
+                    "v1",
+                    "patient-benefit-check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"serviceCode\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"npi\": \"<string>\",\n  \"providerTaxId\": \"<string>\",\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8053173d-97c9-4b4c-956b-13f65771e9c0",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eligibility",
+                    "v1",
+                    "patient-benefit-check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"serviceCode\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"npi\": \"<string>\",\n  \"providerTaxId\": \"<string>\",\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "8d1706d2-8d08-4524-bde9-8a575ae6dcfa",
+      "name": "Claims",
+      "description": {
+        "content": "Claim pre-check, submission, and inquiry",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6e312f7b-b40d-4f59-8b75-2606f85da9eb",
+          "name": "UnitedHealthcare Real Claim Pre-Check",
+          "request": {
+            "name": "UnitedHealthcare Real Claim Pre-Check",
+            "description": {
+              "content": "Validate a claim before submission to identify potential issues including missing information, coverage gaps, authorization requirements, and billing edits. Reduces claim denials and accelerates payment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "claims",
+                "v1",
+                "pre-check"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"memberId\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"serviceDate\": \"<date>\",\n  \"diagnosisCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"procedureCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"charges\": \"<float>\",\n  \"placeOfService\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2920d08f-c4b4-444a-8c35-1eae53a625ad",
+              "name": "Claim pre-check result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claims",
+                    "v1",
+                    "pre-check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"serviceDate\": \"<date>\",\n  \"diagnosisCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"procedureCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"charges\": \"<float>\",\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"validationStatus\": \"ERRORS\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"warnings\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"estimatedPayment\": 9866.402442046225\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0524f0de-cdda-4036-971b-2a186229cea9",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claims",
+                    "v1",
+                    "pre-check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"serviceDate\": \"<date>\",\n  \"diagnosisCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"procedureCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"charges\": \"<float>\",\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "94ac4969-adeb-45f0-b532-8cb0c728eae7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claims",
+                    "v1",
+                    "pre-check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"serviceDate\": \"<date>\",\n  \"diagnosisCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"procedureCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"charges\": \"<float>\",\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "441a3a17-2bb4-4873-9561-ab7cf9fc371a",
+              "name": "Validation failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claims",
+                    "v1",
+                    "pre-check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"serviceDate\": \"<date>\",\n  \"diagnosisCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"procedureCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"charges\": \"<float>\",\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "98e480f3-8860-40ef-bd77-c00f3cebf561",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claims",
+                    "v1",
+                    "pre-check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"serviceDate\": \"<date>\",\n  \"diagnosisCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"procedureCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"charges\": \"<float>\",\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a3d2769-f915-45a7-a940-8bd2c2b8e34f",
+          "name": "UnitedHealthcare Real Claim Inquiry",
+          "request": {
+            "name": "UnitedHealthcare Real Claim Inquiry",
+            "description": {
+              "content": "Retrieve the status and details of submitted claims including payment information, denial reasons, adjustment codes, and explanation of benefits data for a member or provider.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "claims",
+                "v1",
+                "inquiry"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"claimNumber\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"memberId\": \"<string>\",\n  \"dateOfServiceFrom\": \"<date>\",\n  \"dateOfServiceTo\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b0432236-b692-4e53-9582-1410586a9242",
+              "name": "Claim inquiry result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claims",
+                    "v1",
+                    "inquiry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claimNumber\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"memberId\": \"<string>\",\n  \"dateOfServiceFrom\": \"<date>\",\n  \"dateOfServiceTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"claimNumber\": \"string\",\n  \"claimStatus\": \"ADJUSTED\",\n  \"serviceDate\": \"1952-08-27\",\n  \"billedAmount\": 4704.200827484977,\n  \"allowedAmount\": 9543.134018521045,\n  \"paidAmount\": 5161.924649257994,\n  \"patientResponsibility\": 8951.59695610742,\n  \"paymentDate\": \"1978-07-26\",\n  \"checkNumber\": \"string\",\n  \"denialReasonCode\": \"string\",\n  \"denialReasonDescription\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f10e886-fbde-47e0-bdfb-2fea4b9975ae",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claims",
+                    "v1",
+                    "inquiry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claimNumber\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"memberId\": \"<string>\",\n  \"dateOfServiceFrom\": \"<date>\",\n  \"dateOfServiceTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a7215e3e-467c-41b7-9886-099160dff952",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claims",
+                    "v1",
+                    "inquiry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claimNumber\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"memberId\": \"<string>\",\n  \"dateOfServiceFrom\": \"<date>\",\n  \"dateOfServiceTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6493e33d-99b4-4600-a194-6608fc6f20a2",
+              "name": "Claim not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claims",
+                    "v1",
+                    "inquiry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claimNumber\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"memberId\": \"<string>\",\n  \"dateOfServiceFrom\": \"<date>\",\n  \"dateOfServiceTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5a55e814-b498-4e86-b6e4-a07df2b9f0d6",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "claims",
+                    "v1",
+                    "inquiry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claimNumber\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"memberId\": \"<string>\",\n  \"dateOfServiceFrom\": \"<date>\",\n  \"dateOfServiceTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "60da6e14-fda3-4c18-a90f-7312f301438c",
+      "name": "Prior Authorization",
+      "description": {
+        "content": "Prior authorization and referral actions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bb16928a-3f40-44b5-b36e-67fc799d325b",
+          "name": "UnitedHealthcare Real Prior Auth Check",
+          "request": {
+            "name": "UnitedHealthcare Real Prior Auth Check",
+            "description": {
+              "content": "Check if a prior authorization or referral is required for a specific service and procedure, and determine the authorization status for a UnitedHealthcare member.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "prior-auth",
+                "v1",
+                "check"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"memberId\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"serviceCode\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"diagnosisCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"placeOfService\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "62bb39a6-7cac-4d96-9c6b-48b55176ccda",
+              "name": "Prior authorization requirement result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prior-auth",
+                    "v1",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"serviceCode\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"diagnosisCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"authorizationRequired\": true,\n  \"authorizationStatus\": \"DENIED\",\n  \"authorizationNumber\": \"string\",\n  \"validFromDate\": \"1983-03-19\",\n  \"validToDate\": \"2016-07-08\",\n  \"approvedUnits\": 2517,\n  \"referralRequired\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70dd47ef-861c-4c27-97d9-cda62fb4123a",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prior-auth",
+                    "v1",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"serviceCode\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"diagnosisCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b56f94cb-dd00-4202-b709-8fddabc9b0d3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prior-auth",
+                    "v1",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"serviceCode\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"diagnosisCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "94587ffc-0ae3-4f81-8c89-e40a52b38dca",
+              "name": "Member not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prior-auth",
+                    "v1",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"serviceCode\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"diagnosisCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "35fe7995-d7b2-41b9-941b-79b42a715d6c",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prior-auth",
+                    "v1",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"serviceCode\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"diagnosisCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c4632023-2f21-4240-8ec2-1fe438d90b4c",
+      "name": "Providers",
+      "description": {
+        "content": "Provider demographics and directory",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9bf0dd9b-fd04-4db0-98d3-e0ab30920f64",
+          "name": "UnitedHealthcare Provider Demographics",
+          "request": {
+            "name": "UnitedHealthcare Provider Demographics",
+            "description": {
+              "content": "Retrieve demographic and credentialing information for healthcare providers in the UnitedHealthcare network, including contact details, specialties, network participation, and accepting new patients status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providers",
+                "v1",
+                "demographics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "npi",
+                  "value": "<string>",
+                  "description": "(Required) National Provider Identifier (NPI) for the provider"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Two-letter state code to filter results"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ecbf63c4-9d93-4e79-8f9d-0d9b7807f5bc",
+              "name": "Provider demographic information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    "v1",
+                    "demographics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "npi",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"npi\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"organizationName\": \"string\",\n  \"providerType\": \"INDIVIDUAL\",\n  \"specialty\": \"string\",\n  \"subspecialties\": [\n    \"string\",\n    \"string\"\n  ],\n  \"networkStatus\": \"IN_NETWORK\",\n  \"acceptingNewPatients\": false,\n  \"address\": {\n    \"street1\": \"string\",\n    \"street2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"zip\": \"string\"\n  },\n  \"phone\": \"string\",\n  \"languages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"boardCertifications\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "451e5454-a514-4629-9308-c67fefb7b7e2",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    "v1",
+                    "demographics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "npi",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ba37cc88-7767-41c9-8e74-619263be2c77",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    "v1",
+                    "demographics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "npi",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b1f13c9e-31ba-43a1-bb8a-ec27389a7f11",
+              "name": "Provider not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    "v1",
+                    "demographics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "npi",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "95bf1476-78fd-4fd0-aa4f-03daadf77b6c",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    "v1",
+                    "demographics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "npi",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.uhcprovider.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "038e90cc-ee0f-4040-9b0d-127dec1ec8fc",
+    "name": "UnitedHealthcare Provider API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The UnitedHealthcare Provider API provides real-time access to eligibility verification, claims management, prior authorization, and provider directory services for healthcare providers, payers, and health IT developers. Available through the UnitedHealthcare API Marketplace at apimarketplace.uhcprovider.com.\n\nContact Support:\n Name: UnitedHealthcare API Marketplace",
+      "type": "text/plain"
+    }
+  }
+}
