@@ -51,9 +51,9 @@ apis:
       - url: json-schema/provider-claim-inquiry-response-schema.json
         type: Schema
       - url: json-ld/unitedhealthcare-provider-api-context.jsonld
-        type: JSON-LD Context
+        type: JSONLDContext
       - url: examples/provider-eligibility-response-example.json
-        type: Example
+        type: Examples
   - aid: unitedhealthcare:interoperability-api
     name: UnitedHealthcare Interoperability API
     tags:
@@ -80,9 +80,9 @@ apis:
       - url: json-schema/interoperability-fhir-patient-schema.json
         type: Schema
       - url: json-ld/unitedhealthcare-interoperability-api-context.jsonld
-        type: JSON-LD Context
+        type: JSONLDContext
       - url: examples/interoperability-fhir-bundle-example.json
-        type: Example
+        type: Examples
 features:
   - name: Real-Time Eligibility Verification
     description: >-
