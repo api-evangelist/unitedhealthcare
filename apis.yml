@@ -21,6 +21,10 @@ modified: '2026-05-19'
 position: Consuming
 specificationVersion: '0.19'
 common:
+  - type: DomainSecurity
+    url: security/unitedhealthcare-domain-security.yml
+  - type: Authentication
+    url: authentication/unitedhealthcare-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/UnitedHealthCare
   - type: LinkedIn
