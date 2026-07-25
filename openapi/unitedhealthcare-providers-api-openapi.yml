@@ -1,0 +1,136 @@
+openapi: 3.1.0
+info:
+  title: UnitedHealthcare Interoperability Claims Providers API
+  description: The UnitedHealthcare Interoperability APIs provide FHIR R4-compliant access to patient health data in accordance with CMS Interoperability and Patient Access final rule (CMS-9115-F). Includes Patient Access API for member health records and claims history, and Provider Directory API for network provider information. These APIs enable patients and authorized third parties to access health data using standard FHIR resources.
+  version: '1.0'
+  contact:
+    name: UnitedHealthcare Interoperability
+    url: https://www.uhc.com/legal/interoperability-apis
+  license:
+    name: UnitedHealthcare API Terms of Use
+    url: https://www.uhc.com/legal/interoperability-apis
+servers:
+- url: https://api.uhc.com/fhir/R4
+  description: Production FHIR R4 Endpoint
+security:
+- bearerAuth: []
+tags:
+- name: Providers
+  description: Provider demographics and directory
+paths:
+  /providers/v1/demographics:
+    get:
+      operationId: getProviderDemographics
+      summary: UnitedHealthcare Provider Demographics
+      description: Retrieve demographic and credentialing information for healthcare providers in the UnitedHealthcare network, including contact details, specialties, network participation, and accepting new patients status.
+      tags:
+      - Providers
+      x-microcks-operation:
+        dispatcher: SCRIPT
+        dispatcherRules: return 'FOUND';
+      parameters:
+      - name: npi
+        in: query
+        required: true
+        description: National Provider Identifier (NPI) for the provider
+        schema:
+          type: string
+          pattern: ^\d{10}$
+      - name: state
+        in: query
+        required: false
+        description: Two-letter state code to filter results
+        schema:
+          type: string
+          maxLength: 2
+      responses:
+        '200':
+          description: Provider demographic information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderDemographics'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Provider not found
+        '429':
+          description: Too many requests
+components:
+  schemas:
+    ProviderDemographics:
+      type: object
+      description: Healthcare provider demographic and credentialing information
+      properties:
+        npi:
+          type: string
+          description: National Provider Identifier
+        firstName:
+          type: string
+          description: Provider first name
+        lastName:
+          type: string
+          description: Provider last name
+        organizationName:
+          type: string
+          description: Organization name (for group practices)
+        providerType:
+          type: string
+          enum:
+          - INDIVIDUAL
+          - ORGANIZATION
+          description: Provider type
+        specialty:
+          type: string
+          description: Primary specialty
+        subspecialties:
+          type: array
+          description: List of subspecialties
+          items:
+            type: string
+        networkStatus:
+          type: string
+          enum:
+          - IN_NETWORK
+          - OUT_OF_NETWORK
+          description: Network participation status
+        acceptingNewPatients:
+          type: boolean
+          description: Whether accepting new patients
+        address:
+          type: object
+          description: Practice address
+          properties:
+            street1:
+              type: string
+            street2:
+              type: string
+            city:
+              type: string
+            state:
+              type: string
+            zip:
+              type: string
+        phone:
+          type: string
+          description: Office phone number
+        languages:
+          type: array
+          description: Languages spoken
+          items:
+            type: string
+        boardCertifications:
+          type: array
+          description: Board certifications
+          items:
+            type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 Bearer token for FHIR API access
+externalDocs:
+  description: UnitedHealthcare Interoperability APIs Documentation
+  url: https://www.uhc.com/legal/interoperability-apis
