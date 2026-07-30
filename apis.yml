@@ -14,7 +14,20 @@ tags:
   - Claims
   - Eligibility
 kind: company
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/unitedhealthcare.png
 access: 3rd-Party
 created: '2025-03-01'
 modified: '2026-05-19'
@@ -32,63 +45,216 @@ common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/unitedhealthcare
 apis:
-  - aid: unitedhealthcare:provider-api
-    name: UnitedHealthcare Provider API
-    tags:
-      - Health Insurance
-      - Healthcare
-      - Eligibility
-      - Claims
-      - Prior Authorization
-    humanURL: https://apimarketplace.uhcprovider.com/#/
-    baseURL: https://api.uhcprovider.com
-    description: >-
-      The UnitedHealthcare Provider API provides real-time access to eligibility verification, claims management, prior
-      authorization, and provider directory services through the UHC API Marketplace. Enables healthcare providers to
-      verify member coverage, check claim status, validate claims before submission, check prior authorization
-      requirements, and access provider demographic data.
-    properties:
-      - url: https://apimarketplace.uhcprovider.com/#/
-        type: Documentation
-      - url: openapi/unitedhealthcare-provider-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/provider-eligibility-response-schema.json
-        type: Schema
-      - url: json-schema/provider-claim-inquiry-response-schema.json
-        type: Schema
-      - url: json-ld/unitedhealthcare-provider-api-context.jsonld
-        type: JSONLDContext
-      - url: examples/provider-eligibility-response-example.json
-        type: Examples
-  - aid: unitedhealthcare:interoperability-api
-    name: UnitedHealthcare Interoperability API
-    tags:
-      - Health Insurance
-      - Healthcare
-      - FHIR
-      - Patient Access
-      - Provider Directory
-      - Formulary
-    humanURL: https://www.uhc.com/legal/interoperability-apis
-    baseURL: https://api.uhc.com/fhir/R4
-    description: >-
-      The UnitedHealthcare Interoperability APIs provide FHIR R4-compliant access to patient health data in compliance
-      with CMS Interoperability and Patient Access final rule (CMS-9115-F). Includes Patient Access API for member
-      claims history, coverage, and health records, Provider Directory API for network provider search, and Formulary
-      API for drug coverage information.
-    properties:
-      - url: https://www.uhc.com/legal/interoperability-apis
-        type: Documentation
-      - url: openapi/unitedhealthcare-interoperability-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/interoperability-fhir-bundle-schema.json
-        type: Schema
-      - url: json-schema/interoperability-fhir-patient-schema.json
-        type: Schema
-      - url: json-ld/unitedhealthcare-interoperability-api-context.jsonld
-        type: JSONLDContext
-      - url: examples/interoperability-fhir-bundle-example.json
-        type: Examples
+- aid: unitedhealthcare:unitedhealthcare-claims-api
+  name: UnitedHealthcare Claims API
+  description: Claim pre-check, submission, and inquiry
+  humanURL: https://apimarketplace.uhcprovider.com/#/
+  baseURL: https://api.uhcprovider.com
+  tags:
+  - Claims
+  properties:
+  - type: OpenAPI
+    url: openapi/unitedhealthcare-claims-api-openapi.yml
+  - type: Documentation
+    url: https://apimarketplace.uhcprovider.com/#/
+  - type: Schema
+    url: json-schema/provider-eligibility-response-schema.json
+  - type: Schema
+    url: json-schema/provider-claim-inquiry-response-schema.json
+  - type: JSONLDContext
+    url: json-ld/unitedhealthcare-provider-api-context.jsonld
+  - type: Examples
+    url: examples/provider-eligibility-response-example.json
+  - type: Documentation
+    url: https://www.uhc.com/legal/interoperability-apis
+  - type: Schema
+    url: json-schema/interoperability-fhir-bundle-schema.json
+  - type: Schema
+    url: json-schema/interoperability-fhir-patient-schema.json
+  - type: JSONLDContext
+    url: json-ld/unitedhealthcare-interoperability-api-context.jsonld
+  - type: Examples
+    url: examples/interoperability-fhir-bundle-example.json
+- aid: unitedhealthcare:unitedhealthcare-eligibility-api
+  name: UnitedHealthcare Eligibility API
+  description: Real-time eligibility and benefit verification
+  humanURL: https://apimarketplace.uhcprovider.com/#/
+  baseURL: https://api.uhcprovider.com
+  tags:
+  - Eligibility
+  properties:
+  - type: OpenAPI
+    url: openapi/unitedhealthcare-eligibility-api-openapi.yml
+  - type: Documentation
+    url: https://apimarketplace.uhcprovider.com/#/
+  - type: Schema
+    url: json-schema/provider-eligibility-response-schema.json
+  - type: Schema
+    url: json-schema/provider-claim-inquiry-response-schema.json
+  - type: JSONLDContext
+    url: json-ld/unitedhealthcare-provider-api-context.jsonld
+  - type: Examples
+    url: examples/provider-eligibility-response-example.json
+  - type: Documentation
+    url: https://www.uhc.com/legal/interoperability-apis
+  - type: Schema
+    url: json-schema/interoperability-fhir-bundle-schema.json
+  - type: Schema
+    url: json-schema/interoperability-fhir-patient-schema.json
+  - type: JSONLDContext
+    url: json-ld/unitedhealthcare-interoperability-api-context.jsonld
+  - type: Examples
+    url: examples/interoperability-fhir-bundle-example.json
+- aid: unitedhealthcare:unitedhealthcare-formulary-api
+  name: UnitedHealthcare Formulary API
+  description: Drug formulary and coverage information
+  humanURL: https://apimarketplace.uhcprovider.com/#/
+  baseURL: https://api.uhcprovider.com
+  tags:
+  - Formulary
+  properties:
+  - type: OpenAPI
+    url: openapi/unitedhealthcare-formulary-api-openapi.yml
+  - type: Documentation
+    url: https://apimarketplace.uhcprovider.com/#/
+  - type: Schema
+    url: json-schema/provider-eligibility-response-schema.json
+  - type: Schema
+    url: json-schema/provider-claim-inquiry-response-schema.json
+  - type: JSONLDContext
+    url: json-ld/unitedhealthcare-provider-api-context.jsonld
+  - type: Examples
+    url: examples/provider-eligibility-response-example.json
+  - type: Documentation
+    url: https://www.uhc.com/legal/interoperability-apis
+  - type: Schema
+    url: json-schema/interoperability-fhir-bundle-schema.json
+  - type: Schema
+    url: json-schema/interoperability-fhir-patient-schema.json
+  - type: JSONLDContext
+    url: json-ld/unitedhealthcare-interoperability-api-context.jsonld
+  - type: Examples
+    url: examples/interoperability-fhir-bundle-example.json
+- aid: unitedhealthcare:unitedhealthcare-patient-access-api
+  name: UnitedHealthcare Patient Access API
+  description: FHIR R4 Patient Access API for member health data
+  humanURL: https://apimarketplace.uhcprovider.com/#/
+  baseURL: https://api.uhcprovider.com
+  tags:
+  - Patient Access
+  properties:
+  - type: OpenAPI
+    url: openapi/unitedhealthcare-patient-access-api-openapi.yml
+  - type: Documentation
+    url: https://apimarketplace.uhcprovider.com/#/
+  - type: Schema
+    url: json-schema/provider-eligibility-response-schema.json
+  - type: Schema
+    url: json-schema/provider-claim-inquiry-response-schema.json
+  - type: JSONLDContext
+    url: json-ld/unitedhealthcare-provider-api-context.jsonld
+  - type: Examples
+    url: examples/provider-eligibility-response-example.json
+  - type: Documentation
+    url: https://www.uhc.com/legal/interoperability-apis
+  - type: Schema
+    url: json-schema/interoperability-fhir-bundle-schema.json
+  - type: Schema
+    url: json-schema/interoperability-fhir-patient-schema.json
+  - type: JSONLDContext
+    url: json-ld/unitedhealthcare-interoperability-api-context.jsonld
+  - type: Examples
+    url: examples/interoperability-fhir-bundle-example.json
+- aid: unitedhealthcare:unitedhealthcare-prior-authorization-api
+  name: UnitedHealthcare Prior Authorization API
+  description: Prior authorization and referral actions
+  humanURL: https://apimarketplace.uhcprovider.com/#/
+  baseURL: https://api.uhcprovider.com
+  tags:
+  - Prior Authorization
+  properties:
+  - type: OpenAPI
+    url: openapi/unitedhealthcare-prior-authorization-api-openapi.yml
+  - type: Documentation
+    url: https://apimarketplace.uhcprovider.com/#/
+  - type: Schema
+    url: json-schema/provider-eligibility-response-schema.json
+  - type: Schema
+    url: json-schema/provider-claim-inquiry-response-schema.json
+  - type: JSONLDContext
+    url: json-ld/unitedhealthcare-provider-api-context.jsonld
+  - type: Examples
+    url: examples/provider-eligibility-response-example.json
+  - type: Documentation
+    url: https://www.uhc.com/legal/interoperability-apis
+  - type: Schema
+    url: json-schema/interoperability-fhir-bundle-schema.json
+  - type: Schema
+    url: json-schema/interoperability-fhir-patient-schema.json
+  - type: JSONLDContext
+    url: json-ld/unitedhealthcare-interoperability-api-context.jsonld
+  - type: Examples
+    url: examples/interoperability-fhir-bundle-example.json
+- aid: unitedhealthcare:unitedhealthcare-provider-directory-api
+  name: UnitedHealthcare Provider Directory API
+  description: FHIR R4 Provider Directory API for network information
+  humanURL: https://apimarketplace.uhcprovider.com/#/
+  baseURL: https://api.uhcprovider.com
+  tags:
+  - Provider Directory
+  properties:
+  - type: OpenAPI
+    url: openapi/unitedhealthcare-provider-directory-api-openapi.yml
+  - type: Documentation
+    url: https://apimarketplace.uhcprovider.com/#/
+  - type: Schema
+    url: json-schema/provider-eligibility-response-schema.json
+  - type: Schema
+    url: json-schema/provider-claim-inquiry-response-schema.json
+  - type: JSONLDContext
+    url: json-ld/unitedhealthcare-provider-api-context.jsonld
+  - type: Examples
+    url: examples/provider-eligibility-response-example.json
+  - type: Documentation
+    url: https://www.uhc.com/legal/interoperability-apis
+  - type: Schema
+    url: json-schema/interoperability-fhir-bundle-schema.json
+  - type: Schema
+    url: json-schema/interoperability-fhir-patient-schema.json
+  - type: JSONLDContext
+    url: json-ld/unitedhealthcare-interoperability-api-context.jsonld
+  - type: Examples
+    url: examples/interoperability-fhir-bundle-example.json
+- aid: unitedhealthcare:unitedhealthcare-providers-api
+  name: UnitedHealthcare Providers API
+  description: Provider demographics and directory
+  humanURL: https://apimarketplace.uhcprovider.com/#/
+  baseURL: https://api.uhcprovider.com
+  tags:
+  - Providers
+  properties:
+  - type: OpenAPI
+    url: openapi/unitedhealthcare-providers-api-openapi.yml
+  - type: Documentation
+    url: https://apimarketplace.uhcprovider.com/#/
+  - type: Schema
+    url: json-schema/provider-eligibility-response-schema.json
+  - type: Schema
+    url: json-schema/provider-claim-inquiry-response-schema.json
+  - type: JSONLDContext
+    url: json-ld/unitedhealthcare-provider-api-context.jsonld
+  - type: Examples
+    url: examples/provider-eligibility-response-example.json
+  - type: Documentation
+    url: https://www.uhc.com/legal/interoperability-apis
+  - type: Schema
+    url: json-schema/interoperability-fhir-bundle-schema.json
+  - type: Schema
+    url: json-schema/interoperability-fhir-patient-schema.json
+  - type: JSONLDContext
+    url: json-ld/unitedhealthcare-interoperability-api-context.jsonld
+  - type: Examples
+    url: examples/interoperability-fhir-bundle-example.json
 features:
   - name: Real-Time Eligibility Verification
     description: >-
