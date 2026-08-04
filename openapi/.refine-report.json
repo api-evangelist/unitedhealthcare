@@ -1,0 +1,26 @@
+{
+  "provider": "unitedhealthcare",
+  "sources": [
+    "unitedhealthcare-claims-api-openapi.yml",
+    "unitedhealthcare-eligibility-api-openapi.yml",
+    "unitedhealthcare-formulary-api-openapi.yml",
+    "unitedhealthcare-patient-access-api-openapi.yml",
+    "unitedhealthcare-prior-authorization-api-openapi.yml",
+    "unitedhealthcare-provider-directory-api-openapi.yml",
+    "unitedhealthcare-providers-api-openapi.yml"
+  ],
+  "outputs": [
+    "unitedhealthcare-claims-api-openapi.yml",
+    "unitedhealthcare-eligibility-api-openapi.yml",
+    "unitedhealthcare-formulary-api-openapi.yml",
+    "unitedhealthcare-patient-access-api-openapi.yml",
+    "unitedhealthcare-prior-authorization-api-openapi.yml",
+    "unitedhealthcare-provider-directory-api-openapi.yml",
+    "unitedhealthcare-providers-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
