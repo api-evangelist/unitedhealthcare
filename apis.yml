@@ -32,7 +32,7 @@ access: 3rd-Party
 created: '2025-03-01'
 modified: '2026-05-19'
 position: Consuming
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 common:
   - type: AgenticAccess
     url: agentic-access/unitedhealthcare-agentic-access.yml
