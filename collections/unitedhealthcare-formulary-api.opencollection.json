@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UnitedHealthcare Interoperability Claims Formulary API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Formulary",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "UnitedHealthcare List Formulary Medications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.uhc.com/fhir/R4/MedicationKnowledge",
+            "params": [
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "RxNorm drug code"
+              },
+              {
+                "name": "drug-name",
+                "value": "",
+                "type": "query",
+                "description": "Drug name search string"
+              },
+              {
+                "name": "tier",
+                "value": "",
+                "type": "query",
+                "description": "Formulary tier filter"
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results"
+              }
+            ]
+          },
+          "docs": "Retrieve drug formulary information from UnitedHealthcare's FHIR R4 Formulary API including drug coverage tiers, prior authorization requirements, quantity limits, and step therapy requirements."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

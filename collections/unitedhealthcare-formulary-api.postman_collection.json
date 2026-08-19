@@ -1,0 +1,273 @@
+{
+  "item": [
+    {
+      "id": "95bec185-a1fa-40b4-a90b-4a67df698c96",
+      "name": "Formulary",
+      "description": {
+        "content": "Drug formulary and coverage information",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8ade7d6e-b8d3-42c9-9b40-f0c8beb16878",
+          "name": "UnitedHealthcare List Formulary Medications",
+          "request": {
+            "name": "UnitedHealthcare List Formulary Medications",
+            "description": {
+              "content": "Retrieve drug formulary information from UnitedHealthcare's FHIR R4 Formulary API including drug coverage tiers, prior authorization requirements, quantity limits, and step therapy requirements.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "MedicationKnowledge"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "code",
+                  "value": "<string>",
+                  "description": "RxNorm drug code"
+                },
+                {
+                  "disabled": false,
+                  "key": "drug-name",
+                  "value": "<string>",
+                  "description": "Drug name search string"
+                },
+                {
+                  "disabled": false,
+                  "key": "tier",
+                  "value": "<string>",
+                  "description": "Formulary tier filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "_count",
+                  "value": "20",
+                  "description": "Maximum number of results"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c665667d-2459-4174-a003-d293e34d4113",
+              "name": "FHIR Bundle of MedicationKnowledge resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "MedicationKnowledge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "drug-name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_count",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Bundle\",\n  \"id\": \"string\",\n  \"type\": \"searchset\",\n  \"total\": 6584,\n  \"link\": [\n    {\n      \"relation\": \"string\",\n      \"url\": \"string\"\n    },\n    {\n      \"relation\": \"string\",\n      \"url\": \"string\"\n    }\n  ],\n  \"entry\": [\n    {\n      \"fullUrl\": \"string\",\n      \"resource\": {},\n      \"search\": {\n        \"mode\": \"string\"\n      }\n    },\n    {\n      \"fullUrl\": \"string\",\n      \"resource\": {},\n      \"search\": {\n        \"mode\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5bf5c174-ac02-4c84-9d4c-161fdb99155c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "MedicationKnowledge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "drug-name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_count",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "322365a6-64b8-4656-a164-31c585acd9b5",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "MedicationKnowledge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "drug-name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_count",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.uhc.com/fhir/R4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "313166cb-5a00-46c5-975d-a5f5240e2ab5",
+    "name": "UnitedHealthcare Interoperability Claims Formulary API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The UnitedHealthcare Interoperability APIs provide FHIR R4-compliant access to patient health data in accordance with CMS Interoperability and Patient Access final rule (CMS-9115-F). Includes Patient Access API for member health records and claims history, and Provider Directory API for network provider information. These APIs enable patients and authorized third parties to access health data using standard FHIR resources.\n\nContact Support:\n Name: UnitedHealthcare Interoperability",
+      "type": "text/plain"
+    }
+  }
+}

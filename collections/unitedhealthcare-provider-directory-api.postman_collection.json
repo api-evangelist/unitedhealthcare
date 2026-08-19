@@ -1,0 +1,505 @@
+{
+  "item": [
+    {
+      "id": "551366c0-6158-417d-bc8e-0d0ccc535481",
+      "name": "Provider Directory",
+      "description": {
+        "content": "FHIR R4 Provider Directory API for network information",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f2cc999b-e8f8-410b-8338-c0b406843f55",
+          "name": "UnitedHealthcare List Practitioners in Directory",
+          "request": {
+            "name": "UnitedHealthcare List Practitioners in Directory",
+            "description": {
+              "content": "Search the UnitedHealthcare FHIR R4 Provider Directory for practitioners (individual providers) by name, specialty, location, or network participation. Implements the Da Vinci PDex Plan Net IG.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Practitioner"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Provider name search string"
+                },
+                {
+                  "disabled": false,
+                  "key": "specialty",
+                  "value": "<string>",
+                  "description": "NUCC taxonomy code for specialty"
+                },
+                {
+                  "disabled": false,
+                  "key": "address-state",
+                  "value": "<string>",
+                  "description": "State code for location filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "_count",
+                  "value": "20",
+                  "description": "Maximum number of results"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "496d7bd8-05f0-46ed-96c8-35c99bd1e20d",
+              "name": "FHIR Bundle of Practitioner resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Practitioner"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "specialty",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address-state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_count",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Bundle\",\n  \"id\": \"string\",\n  \"type\": \"document\",\n  \"total\": 2467,\n  \"link\": [\n    {\n      \"relation\": \"string\",\n      \"url\": \"string\"\n    },\n    {\n      \"relation\": \"string\",\n      \"url\": \"string\"\n    }\n  ],\n  \"entry\": [\n    {\n      \"fullUrl\": \"string\",\n      \"resource\": {},\n      \"search\": {\n        \"mode\": \"string\"\n      }\n    },\n    {\n      \"fullUrl\": \"string\",\n      \"resource\": {},\n      \"search\": {\n        \"mode\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ecf38b96-03e8-40ac-9f24-c23a9ca8f0c0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Practitioner"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "specialty",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address-state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_count",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "92ad3159-dcbb-4643-97d8-0c422c4e5672",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Practitioner"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "specialty",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address-state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_count",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34ac80a3-b4eb-48d2-beee-45129967351b",
+          "name": "UnitedHealthcare List Organizations in Directory",
+          "request": {
+            "name": "UnitedHealthcare List Organizations in Directory",
+            "description": {
+              "content": "Search the UnitedHealthcare FHIR R4 Provider Directory for healthcare organizations including hospitals, clinics, and group practices by name, type, or location. Implements the Da Vinci PDex Plan Net IG.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Organization"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Organization name search string"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Organization type code"
+                },
+                {
+                  "disabled": false,
+                  "key": "address-state",
+                  "value": "<string>",
+                  "description": "State code for location filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "_count",
+                  "value": "20",
+                  "description": "Maximum number of results"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "19d149df-96ac-4a4a-9b20-afa4307065b6",
+              "name": "FHIR Bundle of Organization resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Organization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address-state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_count",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Bundle\",\n  \"id\": \"string\",\n  \"type\": \"document\",\n  \"total\": 2467,\n  \"link\": [\n    {\n      \"relation\": \"string\",\n      \"url\": \"string\"\n    },\n    {\n      \"relation\": \"string\",\n      \"url\": \"string\"\n    }\n  ],\n  \"entry\": [\n    {\n      \"fullUrl\": \"string\",\n      \"resource\": {},\n      \"search\": {\n        \"mode\": \"string\"\n      }\n    },\n    {\n      \"fullUrl\": \"string\",\n      \"resource\": {},\n      \"search\": {\n        \"mode\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c88f10c4-4951-4e97-868b-c229961b83c7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Organization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address-state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_count",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9e217e85-653f-4f9b-a01b-12d072b8a18c",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Organization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address-state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_count",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.uhc.com/fhir/R4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a254c459-e345-470d-b360-2ef9a8678add",
+    "name": "UnitedHealthcare Interoperability Claims Provider Directory API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The UnitedHealthcare Interoperability APIs provide FHIR R4-compliant access to patient health data in accordance with CMS Interoperability and Patient Access final rule (CMS-9115-F). Includes Patient Access API for member health records and claims history, and Provider Directory API for network provider information. These APIs enable patients and authorized third parties to access health data using standard FHIR resources.\n\nContact Support:\n Name: UnitedHealthcare Interoperability",
+      "type": "text/plain"
+    }
+  }
+}

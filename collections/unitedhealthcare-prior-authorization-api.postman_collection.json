@@ -1,0 +1,340 @@
+{
+  "item": [
+    {
+      "id": "e952414b-6dc6-4c6b-93e8-271e9248466b",
+      "name": "Prior Authorization",
+      "description": {
+        "content": "Prior authorization and referral actions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0baf2597-0b06-4c65-8238-be17faf32228",
+          "name": "UnitedHealthcare Real Prior Auth Check",
+          "request": {
+            "name": "UnitedHealthcare Real Prior Auth Check",
+            "description": {
+              "content": "Check if a prior authorization or referral is required for a specific service and procedure, and determine the authorization status for a UnitedHealthcare member.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "prior-auth",
+                "v1",
+                "check"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"memberId\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"serviceCode\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"diagnosisCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"placeOfService\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "08ea8456-10a9-4b78-a2b9-4f2ac222ef5f",
+              "name": "Prior authorization requirement result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prior-auth",
+                    "v1",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"serviceCode\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"diagnosisCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"authorizationRequired\": false,\n  \"authorizationStatus\": \"NOT_REQUIRED\",\n  \"authorizationNumber\": \"string\",\n  \"validFromDate\": \"1975-03-14\",\n  \"validToDate\": \"1952-10-20\",\n  \"approvedUnits\": 8695,\n  \"referralRequired\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6d2cf52-af95-4994-b9e4-a64c6e175808",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prior-auth",
+                    "v1",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"serviceCode\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"diagnosisCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9614c9f0-35be-4c96-9947-b4748a5bce85",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prior-auth",
+                    "v1",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"serviceCode\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"diagnosisCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1dc6d955-7982-4123-a3b3-a53dc775224b",
+              "name": "Member not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prior-auth",
+                    "v1",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"serviceCode\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"diagnosisCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c384e741-3c04-4ae5-bdac-a99d73f679be",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prior-auth",
+                    "v1",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"npi\": \"<string>\",\n  \"serviceCode\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"dateOfService\": \"<date>\",\n  \"diagnosisCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"placeOfService\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.uhc.com/fhir/R4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ff8a7805-c460-4500-ad40-018e82bd6164",
+    "name": "UnitedHealthcare Interoperability Claims Prior Authorization API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The UnitedHealthcare Interoperability APIs provide FHIR R4-compliant access to patient health data in accordance with CMS Interoperability and Patient Access final rule (CMS-9115-F). Includes Patient Access API for member health records and claims history, and Provider Directory API for network provider information. These APIs enable patients and authorized third parties to access health data using standard FHIR resources.\n\nContact Support:\n Name: UnitedHealthcare Interoperability",
+      "type": "text/plain"
+    }
+  }
+}

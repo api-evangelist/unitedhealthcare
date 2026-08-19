@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UnitedHealthcare Interoperability Claims Prior Authorization API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Prior Authorization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "UnitedHealthcare Real Prior Auth Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.uhc.com/fhir/R4/prior-auth/v1/check",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Check if a prior authorization or referral is required for a specific service and procedure, and determine the authorization status for a UnitedHealthcare member."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

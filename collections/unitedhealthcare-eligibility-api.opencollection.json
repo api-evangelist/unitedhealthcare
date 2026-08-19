@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UnitedHealthcare Interoperability Claims Eligibility API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Eligibility",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "UnitedHealthcare Real-Time Eligibility Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.uhc.com/fhir/R4/eligibility/v1/real-time",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform a real-time pre-service eligibility and benefit verification for a UnitedHealthcare member. Returns coverage details, deductibles, copays, and benefit limits for a specific service type and date of service."
+        },
+        {
+          "info": {
+            "name": "UnitedHealthcare Real Patient Benefit Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.uhc.com/fhir/R4/eligibility/v1/patient-benefit-check",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Check specific patient benefit details for a given service including covered benefits, cost-sharing information, network status, and utilization management requirements."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UnitedHealthcare Interoperability Claims Patient Access API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Patient Access",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "UnitedHealthcare Get Patient Demographics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.uhc.com/fhir/R4/Patient/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "FHIR Patient resource ID (member ID)"
+              }
+            ]
+          },
+          "docs": "Retrieve FHIR R4 Patient resource for a UnitedHealthcare member including demographic information, identifiers, and contact details as required by the CMS Patient Access rule."
+        },
+        {
+          "info": {
+            "name": "UnitedHealthcare List Explanation of Benefits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.uhc.com/fhir/R4/ExplanationOfBenefit",
+            "params": [
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Patient resource ID to retrieve EOBs for"
+              },
+              {
+                "name": "_lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Filter by last updated date (FHIR date parameter)"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by claim type (professional, institutional, pharmacy)"
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              }
+            ]
+          },
+          "docs": "Retrieve FHIR R4 ExplanationOfBenefit resources for a member, providing claims data including services rendered, amounts billed, allowed amounts, and payment details as required by CMS interoperability rules."
+        },
+        {
+          "info": {
+            "name": "UnitedHealthcare List Coverage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.uhc.com/fhir/R4/Coverage",
+            "params": [
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Patient resource ID"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Coverage status filter (active, cancelled, draft)"
+              }
+            ]
+          },
+          "docs": "Retrieve FHIR R4 Coverage resources for a member including current and historical insurance coverage details, plan information, and benefit periods."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

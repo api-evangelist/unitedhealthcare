@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UnitedHealthcare Interoperability Claims Providers API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "UnitedHealthcare Provider Demographics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.uhc.com/fhir/R4/providers/v1/demographics",
+            "params": [
+              {
+                "name": "npi",
+                "value": "",
+                "type": "query",
+                "description": "National Provider Identifier (NPI) for the provider"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Two-letter state code to filter results"
+              }
+            ]
+          },
+          "docs": "Retrieve demographic and credentialing information for healthcare providers in the UnitedHealthcare network, including contact details, specialties, network participation, and accepting new patients status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

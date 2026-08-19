@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UnitedHealthcare Interoperability Claims API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Claims",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "UnitedHealthcare Real Claim Pre-Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.uhc.com/fhir/R4/claims/v1/pre-check",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate a claim before submission to identify potential issues including missing information, coverage gaps, authorization requirements, and billing edits. Reduces claim denials and accelerates payment."
+        },
+        {
+          "info": {
+            "name": "UnitedHealthcare Real Claim Inquiry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.uhc.com/fhir/R4/claims/v1/inquiry",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve the status and details of submitted claims including payment information, denial reasons, adjustment codes, and explanation of benefits data for a member or provider."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

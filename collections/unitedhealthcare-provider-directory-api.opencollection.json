@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UnitedHealthcare Interoperability Claims Provider Directory API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Provider Directory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "UnitedHealthcare List Practitioners in Directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.uhc.com/fhir/R4/Practitioner",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Provider name search string"
+              },
+              {
+                "name": "specialty",
+                "value": "",
+                "type": "query",
+                "description": "NUCC taxonomy code for specialty"
+              },
+              {
+                "name": "address-state",
+                "value": "",
+                "type": "query",
+                "description": "State code for location filter"
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results"
+              }
+            ]
+          },
+          "docs": "Search the UnitedHealthcare FHIR R4 Provider Directory for practitioners (individual providers) by name, specialty, location, or network participation. Implements the Da Vinci PDex Plan Net IG."
+        },
+        {
+          "info": {
+            "name": "UnitedHealthcare List Organizations in Directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.uhc.com/fhir/R4/Organization",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Organization name search string"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Organization type code"
+              },
+              {
+                "name": "address-state",
+                "value": "",
+                "type": "query",
+                "description": "State code for location filter"
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results"
+              }
+            ]
+          },
+          "docs": "Search the UnitedHealthcare FHIR R4 Provider Directory for healthcare organizations including hospitals, clinics, and group practices by name, type, or location. Implements the Da Vinci PDex Plan Net IG."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
