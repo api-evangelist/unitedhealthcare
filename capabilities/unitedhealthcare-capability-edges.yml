@@ -19,28 +19,26 @@ edges:
   capability_id_l1: BC-2800
   capability_name: Eligibility & Benefits Verification
   confidence: 0.9
-  evidence: POST /eligibility/v1/real-time checkEligibility "UnitedHealthcare Real-Time Eligibility Check";
-    "patient-benefit-check" with BenefitCheckRequest/BenefitCheckResponse
-  reason: Operations perform real-time insurance eligibility and benefit verification, which is exactly
-    Eligibility & Benefits Verification in the patient access flow.
+  evidence: POST /eligibility/v1/real-time  checkEligibility  Real-Time Eligibility Check; POST /eligibility/v1/patient-benefit-check  checkPatientBenefit
+  reason: Operations perform real-time insurance eligibility and patient benefit verification, which is
+    precisely eligibility and benefits verification before service delivery.
 - tag: Claims
   spec_file: unitedhealthcare-claims-api-openapi.yml
   capability_id: BC-2870.30
   capability_id_l1: BC-2870
   capability_name: Claim Production & Submission
-  confidence: 0.8
-  evidence: POST /claims/v1/pre-check  claimPreCheck  UnitedHealthcare Real Claim Pre-Check ... POST /claims/v1/inquiry  inquireClaim  UnitedHealthcare
-    Real Claim Inquiry
-  reason: Provider-facing claim pre-check (scrubbing before submission) and claim status inquiry to the
-    payer map directly to Claim Production & Submission within healthcare revenue cycle. Slight ambiguity
-    versus denials handling, so 0.8.
+  confidence: 0.78
+  evidence: POST /claims/v1/pre-check  claimPreCheck; POST /claims/v1/inquiry  inquireClaim; schemas ClaimInquiryRequest,
+    ClaimPreCheckResponse
+  reason: Provider-facing claim pre-check (scrubbing before submission) and claim status inquiry map to
+    claim production, scrubbing and status tracking within healthcare revenue cycle.
 - tag: Patient Access
   spec_file: unitedhealthcare-patient-access-api-openapi.yml
   capability_id: BC-2900.60
   capability_id_l1: BC-2900
   capability_name: Healthcare Interoperability Operations
-  confidence: 0.8
-  evidence: '"FHIR R4-compliant access to patient health data in accordance with CMS Interoperability
-    and Patient Access final rule"; GET /Patient/{id}, GET /ExplanationOfBenefit, GET /Coverage'
-  reason: FHIR endpoints enabling patient-initiated data sharing of records, coverage and EOBs — healthcare
-    interoperability operations.
+  confidence: 0.7
+  evidence: '"These APIs enable patients and authorized third parties to access health data using standard
+    FHIR resources"; GET /Coverage listCoverage; GET /ExplanationOfBenefit'
+  reason: FHIR resource endpoints supporting patient-initiated data sharing under the CMS Interoperability
+    rule realise healthcare interoperability operations.
