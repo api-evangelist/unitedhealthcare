@@ -1,26 +1,33 @@
 {
   "provider": "unitedhealthcare",
   "sources": [
-    "unitedhealthcare-claims-api-openapi.yml",
-    "unitedhealthcare-eligibility-api-openapi.yml",
-    "unitedhealthcare-formulary-api-openapi.yml",
-    "unitedhealthcare-patient-access-api-openapi.yml",
-    "unitedhealthcare-prior-authorization-api-openapi.yml",
-    "unitedhealthcare-provider-directory-api-openapi.yml",
-    "unitedhealthcare-providers-api-openapi.yml"
+    "_original/unitedhealthcare-interoperability-api-openapi.yml",
+    "_original/unitedhealthcare-provider-api-openapi.yml"
   ],
   "outputs": [
-    "unitedhealthcare-claims-api-openapi.yml",
-    "unitedhealthcare-eligibility-api-openapi.yml",
     "unitedhealthcare-formulary-api-openapi.yml",
     "unitedhealthcare-patient-access-api-openapi.yml",
-    "unitedhealthcare-prior-authorization-api-openapi.yml",
     "unitedhealthcare-provider-directory-api-openapi.yml",
+    "unitedhealthcare-claims-api-openapi.yml",
+    "unitedhealthcare-eligibility-api-openapi.yml",
+    "unitedhealthcare-prior-authorization-api-openapi.yml",
     "unitedhealthcare-providers-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "unitedhealthcare-interoperability-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "unitedhealthcare-provider-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+  ],
+  "skipped": [
+    "unitedhealthcare-claims-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unitedhealthcare-eligibility-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unitedhealthcare-formulary-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unitedhealthcare-patient-access-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unitedhealthcare-prior-authorization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unitedhealthcare-provider-directory-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unitedhealthcare-providers-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
