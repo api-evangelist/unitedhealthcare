@@ -45,6 +45,9 @@ modified: '2026-05-19'
 position: Consuming
 specificationVersion: '0.23'
 common:
+  - type: CapabilityMap
+    url: capabilities/unitedhealthcare-capability-edges.yml
+    name: UnitedHealthcare Business Capability Map
   - type: AgenticAccess
     url: agentic-access/unitedhealthcare-agentic-access.yml
   - type: DomainSecurity
