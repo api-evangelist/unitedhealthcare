@@ -84,38 +84,6 @@ paths:
           description: Too many requests
 components:
   schemas:
-    BenefitCheckRequest:
-      type: object
-      description: Request for patient-specific benefit check
-      required:
-      - memberId
-      - dateOfBirth
-      - serviceCode
-      - dateOfService
-      properties:
-        memberId:
-          type: string
-          description: UnitedHealthcare member ID
-        dateOfBirth:
-          type: string
-          format: date
-          description: Member date of birth
-        serviceCode:
-          type: string
-          description: CPT/HCPCS service code
-        dateOfService:
-          type: string
-          format: date
-          description: Date of service
-        npi:
-          type: string
-          description: Rendering provider NPI
-        providerTaxId:
-          type: string
-          description: Provider tax ID
-        placeOfService:
-          type: string
-          description: Place of service code
     BenefitCheckResponse:
       type: object
       description: Patient benefit check response
@@ -178,6 +146,38 @@ components:
         groupNumber:
           type: string
           description: Insurance group number
+    BenefitCheckRequest:
+      type: object
+      description: Request for patient-specific benefit check
+      required:
+      - memberId
+      - dateOfBirth
+      - serviceCode
+      - dateOfService
+      properties:
+        memberId:
+          type: string
+          description: UnitedHealthcare member ID
+        dateOfBirth:
+          type: string
+          format: date
+          description: Member date of birth
+        serviceCode:
+          type: string
+          description: CPT/HCPCS service code
+        dateOfService:
+          type: string
+          format: date
+          description: Date of service
+        npi:
+          type: string
+          description: Rendering provider NPI
+        providerTaxId:
+          type: string
+          description: Provider tax ID
+        placeOfService:
+          type: string
+          description: Place of service code
     EligibilityResponse:
       type: object
       description: Real-time eligibility verification response

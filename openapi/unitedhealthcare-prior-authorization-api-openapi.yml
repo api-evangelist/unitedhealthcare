@@ -52,6 +52,38 @@ paths:
           description: Too many requests
 components:
   schemas:
+    PriorAuthCheckRequest:
+      type: object
+      description: Request to check prior authorization requirements
+      required:
+      - memberId
+      - npi
+      - serviceCode
+      properties:
+        memberId:
+          type: string
+          description: Member ID
+        npi:
+          type: string
+          description: Provider NPI
+        serviceCode:
+          type: string
+          description: CPT/HCPCS service code
+        serviceType:
+          type: string
+          description: Service type description
+        dateOfService:
+          type: string
+          format: date
+          description: Planned date of service
+        diagnosisCodes:
+          type: array
+          description: Supporting ICD-10 diagnosis codes
+          items:
+            type: string
+        placeOfService:
+          type: string
+          description: Place of service code
     PriorAuthCheckResponse:
       type: object
       description: Prior authorization requirement response
@@ -85,38 +117,6 @@ components:
         referralRequired:
           type: boolean
           description: Whether a referral is required
-    PriorAuthCheckRequest:
-      type: object
-      description: Request to check prior authorization requirements
-      required:
-      - memberId
-      - npi
-      - serviceCode
-      properties:
-        memberId:
-          type: string
-          description: Member ID
-        npi:
-          type: string
-          description: Provider NPI
-        serviceCode:
-          type: string
-          description: CPT/HCPCS service code
-        serviceType:
-          type: string
-          description: Service type description
-        dateOfService:
-          type: string
-          format: date
-          description: Planned date of service
-        diagnosisCodes:
-          type: array
-          description: Supporting ICD-10 diagnosis codes
-          items:
-            type: string
-        placeOfService:
-          type: string
-          description: Place of service code
   securitySchemes:
     bearerAuth:
       type: http

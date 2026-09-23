@@ -84,56 +84,27 @@ paths:
           description: Too many requests
 components:
   schemas:
-    ClaimInquiryResponse:
+    ClaimInquiryRequest:
       type: object
-      description: Claim inquiry response
+      description: Request for claim status inquiry
       properties:
         claimNumber:
           type: string
           description: UHC claim number
-        claimStatus:
+        npi:
           type: string
-          enum:
-          - RECEIVED
-          - IN_PROCESS
-          - PROCESSED
-          - DENIED
-          - ADJUSTED
-          - REVERSED
-          description: Current claim status
-        serviceDate:
+          description: Provider NPI
+        memberId:
+          type: string
+          description: Member ID
+        dateOfServiceFrom:
           type: string
           format: date
-          description: Date of service
-        billedAmount:
-          type: number
-          format: float
-          description: Total billed charges
-        allowedAmount:
-          type: number
-          format: float
-          description: Allowed amount
-        paidAmount:
-          type: number
-          format: float
-          description: Amount paid to provider
-        patientResponsibility:
-          type: number
-          format: float
-          description: Patient responsibility amount
-        paymentDate:
+          description: Start date for service date range
+        dateOfServiceTo:
           type: string
           format: date
-          description: Date of payment
-        checkNumber:
-          type: string
-          description: Payment check or EFT trace number
-        denialReasonCode:
-          type: string
-          description: Reason code if claim was denied
-        denialReasonDescription:
-          type: string
-          description: Description of denial reason
+          description: End date for service date range
     ClaimPreCheckRequest:
       type: object
       description: Request for claim pre-submission validation
@@ -206,27 +177,56 @@ components:
           type: number
           format: float
           description: Estimated payment if claim is valid
-    ClaimInquiryRequest:
+    ClaimInquiryResponse:
       type: object
-      description: Request for claim status inquiry
+      description: Claim inquiry response
       properties:
         claimNumber:
           type: string
           description: UHC claim number
-        npi:
+        claimStatus:
           type: string
-          description: Provider NPI
-        memberId:
-          type: string
-          description: Member ID
-        dateOfServiceFrom:
+          enum:
+          - RECEIVED
+          - IN_PROCESS
+          - PROCESSED
+          - DENIED
+          - ADJUSTED
+          - REVERSED
+          description: Current claim status
+        serviceDate:
           type: string
           format: date
-          description: Start date for service date range
-        dateOfServiceTo:
+          description: Date of service
+        billedAmount:
+          type: number
+          format: float
+          description: Total billed charges
+        allowedAmount:
+          type: number
+          format: float
+          description: Allowed amount
+        paidAmount:
+          type: number
+          format: float
+          description: Amount paid to provider
+        patientResponsibility:
+          type: number
+          format: float
+          description: Patient responsibility amount
+        paymentDate:
           type: string
           format: date
-          description: End date for service date range
+          description: Date of payment
+        checkNumber:
+          type: string
+          description: Payment check or EFT trace number
+        denialReasonCode:
+          type: string
+          description: Reason code if claim was denied
+        denialReasonDescription:
+          type: string
+          description: Description of denial reason
   securitySchemes:
     bearerAuth:
       type: http
