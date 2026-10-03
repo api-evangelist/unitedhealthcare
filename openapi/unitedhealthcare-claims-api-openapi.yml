@@ -84,6 +84,64 @@ paths:
           description: Too many requests
 components:
   schemas:
+    ClaimPreCheckRequest:
+      type: object
+      description: Request for claim pre-submission validation
+      required:
+      - memberId
+      - npi
+      - serviceDate
+      - diagnosisCodes
+      - procedureCodes
+      properties:
+        memberId:
+          type: string
+          description: Member ID
+        npi:
+          type: string
+          description: Billing provider NPI
+        serviceDate:
+          type: string
+          format: date
+          description: Date of service
+        diagnosisCodes:
+          type: array
+          description: ICD-10 diagnosis codes
+          items:
+            type: string
+        procedureCodes:
+          type: array
+          description: CPT/HCPCS procedure codes
+          items:
+            type: string
+        charges:
+          type: number
+          format: float
+          description: Total billed charges
+        placeOfService:
+          type: string
+          description: Place of service code
+    ClaimInquiryRequest:
+      type: object
+      description: Request for claim status inquiry
+      properties:
+        claimNumber:
+          type: string
+          description: UHC claim number
+        npi:
+          type: string
+          description: Provider NPI
+        memberId:
+          type: string
+          description: Member ID
+        dateOfServiceFrom:
+          type: string
+          format: date
+          description: Start date for service date range
+        dateOfServiceTo:
+          type: string
+          format: date
+          description: End date for service date range
     ClaimInquiryResponse:
       type: object
       description: Claim inquiry response
@@ -134,64 +192,6 @@ components:
         denialReasonDescription:
           type: string
           description: Description of denial reason
-    ClaimInquiryRequest:
-      type: object
-      description: Request for claim status inquiry
-      properties:
-        claimNumber:
-          type: string
-          description: UHC claim number
-        npi:
-          type: string
-          description: Provider NPI
-        memberId:
-          type: string
-          description: Member ID
-        dateOfServiceFrom:
-          type: string
-          format: date
-          description: Start date for service date range
-        dateOfServiceTo:
-          type: string
-          format: date
-          description: End date for service date range
-    ClaimPreCheckRequest:
-      type: object
-      description: Request for claim pre-submission validation
-      required:
-      - memberId
-      - npi
-      - serviceDate
-      - diagnosisCodes
-      - procedureCodes
-      properties:
-        memberId:
-          type: string
-          description: Member ID
-        npi:
-          type: string
-          description: Billing provider NPI
-        serviceDate:
-          type: string
-          format: date
-          description: Date of service
-        diagnosisCodes:
-          type: array
-          description: ICD-10 diagnosis codes
-          items:
-            type: string
-        procedureCodes:
-          type: array
-          description: CPT/HCPCS procedure codes
-          items:
-            type: string
-        charges:
-          type: number
-          format: float
-          description: Total billed charges
-        placeOfService:
-          type: string
-          description: Place of service code
     ClaimPreCheckResponse:
       type: object
       description: Claim pre-check validation result

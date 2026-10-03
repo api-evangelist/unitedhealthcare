@@ -84,6 +84,68 @@ paths:
           description: Too many requests
 components:
   schemas:
+    BenefitCheckResponse:
+      type: object
+      description: Patient benefit check response
+      properties:
+        coveredBenefit:
+          type: boolean
+          description: Whether the service is a covered benefit
+        authorizationRequired:
+          type: boolean
+          description: Whether prior authorization is required
+        referralRequired:
+          type: boolean
+          description: Whether a referral is required
+        estimatedPatientResponsibility:
+          type: number
+          format: float
+          description: Estimated patient cost responsibility
+        estimatedPlanPayment:
+          type: number
+          format: float
+          description: Estimated plan payment amount
+        costSharingDetails:
+          type: object
+          description: Detailed cost-sharing breakdown
+          properties:
+            copay:
+              type: number
+              format: float
+            coinsurance:
+              type: number
+              format: float
+            deductibleApplies:
+              type: boolean
+    EligibilityRequest:
+      type: object
+      description: Request parameters for real-time eligibility verification
+      required:
+      - memberId
+      - dateOfBirth
+      - serviceType
+      - dateOfService
+      properties:
+        memberId:
+          type: string
+          description: UnitedHealthcare member ID
+        dateOfBirth:
+          type: string
+          format: date
+          description: Member date of birth (YYYY-MM-DD)
+        serviceType:
+          type: string
+          description: Service type code (X12 270/271 service type codes)
+        dateOfService:
+          type: string
+          format: date
+          description: Requested date of service
+        npi:
+          type: string
+          description: Rendering provider NPI
+        groupNumber:
+          type: string
+          description: Insurance group number
     BenefitCheckRequest:
       type: object
       description: Request for patient-specific benefit check
@@ -116,35 +178,6 @@ components:
         placeOfService:
           type: string
           description: Place of service code
-    EligibilityRequest:
-      type: object
-      description: Request parameters for real-time eligibility verification
-      required:
-      - memberId
-      - dateOfBirth
-      - serviceType
-      - dateOfService
-      properties:
-        memberId:
-          type: string
-          description: UnitedHealthcare member ID
-        dateOfBirth:
-          type: string
-          format: date
-          description: Member date of birth (YYYY-MM-DD)
-        serviceType:
-          type: string
-          description: Service type code (X12 270/271 service type codes)
-        dateOfService:
-          type: string
-          format: date
-          description: Requested date of service
-        npi:
-          type: string
-          description: Rendering provider NPI
-        groupNumber:
-          type: string
-          description: Insurance group number
     EligibilityResponse:
       type: object
       description: Real-time eligibility verification response
@@ -207,39 +240,6 @@ components:
           - OUT_OF_NETWORK
           - UNKNOWN
           description: Provider network participation status
-    BenefitCheckResponse:
-      type: object
-      description: Patient benefit check response
-      properties:
-        coveredBenefit:
-          type: boolean
-          description: Whether the service is a covered benefit
-        authorizationRequired:
-          type: boolean
-          description: Whether prior authorization is required
-        referralRequired:
-          type: boolean
-          description: Whether a referral is required
-        estimatedPatientResponsibility:
-          type: number
-          format: float
-          description: Estimated patient cost responsibility
-        estimatedPlanPayment:
-          type: number
-          format: float
-          description: Estimated plan payment amount
-        costSharingDetails:
-          type: object
-          description: Detailed cost-sharing breakdown
-          properties:
-            copay:
-              type: number
-              format: float
-            coinsurance:
-              type: number
-              format: float
-            deductibleApplies:
-              type: boolean
   securitySchemes:
     bearerAuth:
       type: http
