@@ -84,6 +84,68 @@ paths:
           description: Too many requests
 components:
   schemas:
+    EligibilityResponse:
+      type: object
+      description: Real-time eligibility verification response
+      properties:
+        memberId:
+          type: string
+          description: UnitedHealthcare member ID
+        memberName:
+          type: string
+          description: Member full name
+        coverageStatus:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - TERMED
+          description: Current coverage status
+        planName:
+          type: string
+          description: Insurance plan name
+        groupNumber:
+          type: string
+          description: Group number
+        effectiveDate:
+          type: string
+          format: date
+          description: Coverage effective date
+        terminationDate:
+          type: string
+          format: date
+          description: Coverage termination date
+        deductible:
+          type: number
+          format: float
+          description: Annual deductible amount
+        deductibleMet:
+          type: number
+          format: float
+          description: Year-to-date deductible amount met
+        outOfPocketMax:
+          type: number
+          format: float
+          description: Annual out-of-pocket maximum
+        outOfPocketMet:
+          type: number
+          format: float
+          description: Year-to-date out-of-pocket amount met
+        copay:
+          type: number
+          format: float
+          description: Copay amount for the service type
+        coinsurance:
+          type: number
+          format: float
+          description: Coinsurance percentage (0-100)
+        networkStatus:
+          type: string
+          enum:
+          - IN_NETWORK
+          - OUT_OF_NETWORK
+          - UNKNOWN
+          description: Provider network participation status
     BenefitCheckResponse:
       type: object
       description: Patient benefit check response
@@ -178,68 +240,6 @@ components:
         placeOfService:
           type: string
           description: Place of service code
-    EligibilityResponse:
-      type: object
-      description: Real-time eligibility verification response
-      properties:
-        memberId:
-          type: string
-          description: UnitedHealthcare member ID
-        memberName:
-          type: string
-          description: Member full name
-        coverageStatus:
-          type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
-          - TERMED
-          description: Current coverage status
-        planName:
-          type: string
-          description: Insurance plan name
-        groupNumber:
-          type: string
-          description: Group number
-        effectiveDate:
-          type: string
-          format: date
-          description: Coverage effective date
-        terminationDate:
-          type: string
-          format: date
-          description: Coverage termination date
-        deductible:
-          type: number
-          format: float
-          description: Annual deductible amount
-        deductibleMet:
-          type: number
-          format: float
-          description: Year-to-date deductible amount met
-        outOfPocketMax:
-          type: number
-          format: float
-          description: Annual out-of-pocket maximum
-        outOfPocketMet:
-          type: number
-          format: float
-          description: Year-to-date out-of-pocket amount met
-        copay:
-          type: number
-          format: float
-          description: Copay amount for the service type
-        coinsurance:
-          type: number
-          format: float
-          description: Coinsurance percentage (0-100)
-        networkStatus:
-          type: string
-          enum:
-          - IN_NETWORK
-          - OUT_OF_NETWORK
-          - UNKNOWN
-          description: Provider network participation status
   securitySchemes:
     bearerAuth:
       type: http
